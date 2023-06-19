@@ -1,0 +1,111 @@
+[
+	{
+		"name": "Startup 1",
+		"description": "This is the description of Startup 1.",
+		"problems": "The problems addressed by Startup 1.",
+		"dangers": "The potential dangers involved with Startup 1.",
+		"solution": "The solution offered by Startup 1.",
+		"video_urls": "https://www.example.com/video1",
+		"team": [
+			{
+				"name": "John Doe",
+				"jobTitle": "CEO",
+				"description": "John Doe is the CEO of Startup 1. He is responsible for overseeing the company's operations."
+			},
+			{
+				"name": "Jane Smith",
+				"jobTitle": "CTO",
+				"description": "Jane Smith is the CTO of Startup 1. She leads the technical team and drives innovation."
+			}
+		]
+	},
+	{
+		"name": "Startup 2",
+		"description": "This is the description of Startup 2.",
+		"problems": "The problems addressed by Startup 2.",
+		"dangers": "The potential dangers involved with Startup 2.",
+		"solution": "The solution offered by Startup 2.",
+		"video_urls": "https://www.example.com/video2",
+		"team": [
+			{
+				"name": "Mark Johnson",
+				"jobTitle": "Founder",
+				"description": "Mark Johnson is the founder of Startup 2. He conceived the idea and drives the company's vision."
+			},
+			{
+				"name": "Emily Brown",
+				"jobTitle": "COO",
+				"description": "Emily Brown is the COO of Startup 2. She oversees the company's day-to-day operations."
+			},
+			{
+				"name": "Michael Davis",
+				"jobTitle": "Lead Engineer",
+				"description": "Michael Davis is the lead engineer of Startup 2. He is responsible for developing the core technology."
+			}
+		]
+	},
+	{
+		"name": "Startup 3",
+		"description": "This is the description of Startup 3.",
+		"problems": "The problems addressed by Startup 3.",
+		"dangers": "The potential dangers involved with Startup 3.",
+		"video_urls": "https://www.example.com/video3",
+		"team": [
+			{
+				"name": "Sarah Thompson",
+				"jobTitle": "CEO",
+				"description": "Sarah Thompson is the CEO of Startup 3. She provides strategic leadership and direction."
+			}
+		]
+	},
+	{
+		"name": "Startup 4",
+		"description": "This is the description of Startup 4.",
+		"problems": "The problems addressed by Startup 4.",
+		"dangers": "The potential dangers involved with Startup 4.",
+		"solution": "The solution offered by Startup 4.",
+		"video_urls": "https://www.example.com/video4",
+		"team": [
+			{
+				"name": "David Wilson",
+				"jobTitle": "Founder",
+				"description": "David Wilson is the founder of Startup 4. He is responsible for the initial idea and business development."
+			},
+			{
+				"name": "Jessica Lee",
+				"jobTitle": "CMO",
+				"description": "Jessica Lee is the CMO of Startup 4. She leads the marketing and branding efforts."
+			},
+			{
+				"name": "Alex Turner",
+				"jobTitle": "Lead Designer",
+				"description": "Alex Turner is the lead designer of Startup 4. He creates intuitive and visually appealing user interfaces."
+			}
+		]
+	},
+	{
+		"name": "Startup 5",
+		"description": "This is the description of Startup 5.",
+		"problems": "The problems addressed by Startup 5.",
+		"dangers": "The potential dangers involved with Startup 5.",
+		"solution": "The solution offered by Startup 5.",
+		"video_urls": "https://www.example.com/video5",
+		"team": [
+			{
+				"name": "Rachel Adams",
+				"jobTitle": "CEO",
+				"description": "Rachel Adams is the CEO of Startup 5. She provides strategic leadership and manages the overall operations of the company."
+			},
+			{
+				"name": "Daniel Clark",
+				"jobTitle": "CTO",
+				"description": "Daniel Clark is the CTO of Startup 5. He oversees the technical aspects and drives innovation within the company."
+			},
+			{
+				"name": "Lisa Martinez",
+				"jobTitle": "CMO",
+				"description": "Lisa Martinez is the CMO of Startup 5. She leads the marketing efforts and develops strategies to promote the company's products."
+			}
+		]
+	}
+]

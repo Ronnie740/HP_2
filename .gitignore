@@ -1,0 +1,8 @@
+**/node_modules
+.env
+text.txt
+# Ignore ESLint cache files
+client/node_modules/.cache/
+
+# Ignore default-development packs
+client/node_modules/.cache/default-development/
