@@ -11,20 +11,22 @@ const Header = () => {
 	const { isAuthenticated, user } = useAuth0();
 	console.log('isAuthenticated:', isAuthenticated);
 	console.log('user:', user);
+	isAuthenticated ? localStorage.setItem('isAuthenticated', 'true') : localStorage.setItem('isAuthenticated', 'false');
 	return (
 		<header className='mx-20 flex flex-row justify-between my-5 w-f'>
 			{/*Logo and navigation*/}
 			<div className='flex space-x-5'>
 				{/* Logo */}
-				<a href='/'>
+				<Link to='/'>
 					<img className='w-40 h-15' src={logo} alt='Logo' />
-				</a>
+				</Link>
 				{/* Nav */}
 				<div className='w-auto space-x-5 mt-3'>
 					<Link to='discover'>Discover</Link>
 					<Link to='facts'>Climate Change Facts</Link>
 					<Link to='about'>About Us</Link>
 					<Link to='contact'>Contact Us</Link>
+					{isAuthenticated ? <Link to='account'>Account</Link> : ' '}
 				</div>
 			</div>
 			{/* Login and Signup */}
