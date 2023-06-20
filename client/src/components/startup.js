@@ -18,6 +18,7 @@ const ProgressBar = ({ value, maxValue }) => {
 	);
 };
 const StartupTemplate = ({ startupName, startupDesc, startupCountry, startupCategory, goalPercentage, goal, problemSolved, dangers, solution, videos, teamMembers }) => {
+	goalPercentage = 80;
 	return (
 		<main className='mx-20'>
 			{/* Startup Bio */}
@@ -34,6 +35,8 @@ const StartupTemplate = ({ startupName, startupDesc, startupCountry, startupCate
 					</div>
 					<div className='flex flex-col my-auto text-center space-y-4'>
 						<div className='flex justify-center'>
+							{/* Add functionality to check for percentage from the paypal.me links later on */}
+							{/* value={goalPercentage}  */}
 							<ProgressBar maxValue={100} value={goalPercentage} />
 						</div>
 						{/* Percentage of donations to goal */}

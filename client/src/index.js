@@ -6,11 +6,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './axios-config';
+// import { Auth0Provider } from '@auth0/auth0-react';
+
+// const auth0Domain = 'dev-yzjbam3nbxrpmush.us.auth0.com';
+// const auth0ClientId = 'Qg6s0AI48wmC1d0ZKyAusNfDGNktZcGY';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
+		{/* <Auth0Provider domain={auth0Domain} clientId={auth0ClientId} redirectUri={window.location.origin}> */}
 		<App />
+		{/* </Auth0Provider> */}
 	</React.StrictMode>
 );
 

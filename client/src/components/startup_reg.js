@@ -163,10 +163,16 @@ const StartupReg = () => {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// Send startupData to the server
 		console.log(startupData);
+		try {
+			const response = await axios.post('/startups', startupData);
+			console.log(response.data); // Handle the response as needed
+		} catch (error) {
+			console.error(error);
+		}
 		// Reset the form fields
 		setStartupData({
 			startupName: '',
@@ -185,7 +191,7 @@ const StartupReg = () => {
 	};
 
 	return (
-		<main className='mx-20 bg-slate-200 m-10 p-5 rounded-md'>
+		<main className='mx-20 bg-slate-200 m-10 p-5 rounded-md shadow-lg'>
 			<form className='' onSubmit={handleSubmit}>
 				{/* Startup Name */}
 				<div className='flex flex-row space-x-10'>
@@ -359,6 +365,7 @@ const StartupReg = () => {
 							name='video'
 							value={video}
 							onChange={(e) => handleVideoInputChange(e, index)}
+							placeholder='Paste Link'
 							className='w-full bg-white border border-gray-300 py-2 px-4 rounded-md shadow-sm'
 							required
 						/>
