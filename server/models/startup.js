@@ -5,37 +5,57 @@
 const mongoose = require('mongoose');
 
 const startupSchema = new mongoose.Schema({
-	name: {
+	startupName: {
 		type: String,
 		required: true,
 	},
-	description: {
+	startupDesc: {
 		type: String,
 		required: true,
 	},
-	problems: {
+	startupCountry: {
 		type: String,
 		required: true,
 	},
-	dangers: {
+	startupCategory: {
 		type: String,
 		required: true,
 	},
+	paypalLink: {
+		type: String,
+		required: true,
+	},
+	goal: {
+		type: String,
+		required: true,
+	},
+	problemSolved: {
+		type: String,
+		required: true,
+	},
+	dangers: [
+		{
+			type: String,
+			required: true,
+		},
+	],
 	solution: {
 		type: String,
 		required: false,
 	},
-	video_urls: {
-		type: String,
-		required: false,
-	},
-	team: [
+	videos: [
+		{
+			type: String,
+			required: false,
+		},
+	],
+	teamMembers: [
 		{
 			name: {
 				type: String,
 				required: true,
 			},
-			jobTitle: {
+			title: {
 				type: String,
 				required: true,
 			},
