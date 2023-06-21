@@ -3,9 +3,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+// const authRoutes = require('./routes/auth');
 const app = express();
 const port = 4000;
+const router = require('./routes/routes');
 
 // Middleware
 app.use(express.json());
@@ -31,28 +32,6 @@ mongoose
 		console.error('MongoDB connection error:', error);
 		process.exit(1); // Exit with failure
 	});
-
-// // Routes
-// const usersRouter = require('./routes/users');
-// const startupsRouter = require('./routes/startups');
-// const postsRouter = require('./routes/posts');
-
-// app.use('/users', usersRouter);
-// app.use('/startups', startupsRouter);
-// app.use('/posts', postsRouter);
-
-// // Default Route
-// app.get('/', (req, res) => {
-// 	res.send('Welcome to your MERN app!');
-// });
-// Routes
-const startupsRouter = require('./routes/startups');
-
-app.use('/startups', startupsRouter);
-
-// Default Route
-app.get('/', (req, res) => {
-	res.send('Welcome to your MERN app!');
-});
+app.use('/', router);
 
 module.exports = app;
