@@ -1,111 +1,244 @@
-[
-	{
-		"name": "Startup 1",
-		"description": "This is the description of Startup 1.",
-		"problems": "The problems addressed by Startup 1.",
-		"dangers": "The potential dangers involved with Startup 1.",
-		"solution": "The solution offered by Startup 1.",
-		"video_urls": "https://www.example.com/video1",
-		"team": [
-			{
-				"name": "John Doe",
-				"jobTitle": "CEO",
-				"description": "John Doe is the CEO of Startup 1. He is responsible for overseeing the company's operations."
-			},
-			{
-				"name": "Jane Smith",
-				"jobTitle": "CTO",
-				"description": "Jane Smith is the CTO of Startup 1. She leads the technical team and drives innovation."
-			}
-		]
-	},
-	{
-		"name": "Startup 2",
-		"description": "This is the description of Startup 2.",
-		"problems": "The problems addressed by Startup 2.",
-		"dangers": "The potential dangers involved with Startup 2.",
-		"solution": "The solution offered by Startup 2.",
-		"video_urls": "https://www.example.com/video2",
-		"team": [
-			{
-				"name": "Mark Johnson",
-				"jobTitle": "Founder",
-				"description": "Mark Johnson is the founder of Startup 2. He conceived the idea and drives the company's vision."
-			},
-			{
-				"name": "Emily Brown",
-				"jobTitle": "COO",
-				"description": "Emily Brown is the COO of Startup 2. She oversees the company's day-to-day operations."
-			},
-			{
-				"name": "Michael Davis",
-				"jobTitle": "Lead Engineer",
-				"description": "Michael Davis is the lead engineer of Startup 2. He is responsible for developing the core technology."
-			}
-		]
-	},
-	{
-		"name": "Startup 3",
-		"description": "This is the description of Startup 3.",
-		"problems": "The problems addressed by Startup 3.",
-		"dangers": "The potential dangers involved with Startup 3.",
-		"video_urls": "https://www.example.com/video3",
-		"team": [
-			{
-				"name": "Sarah Thompson",
-				"jobTitle": "CEO",
-				"description": "Sarah Thompson is the CEO of Startup 3. She provides strategic leadership and direction."
-			}
-		]
-	},
-	{
-		"name": "Startup 4",
-		"description": "This is the description of Startup 4.",
-		"problems": "The problems addressed by Startup 4.",
-		"dangers": "The potential dangers involved with Startup 4.",
-		"solution": "The solution offered by Startup 4.",
-		"video_urls": "https://www.example.com/video4",
-		"team": [
-			{
-				"name": "David Wilson",
-				"jobTitle": "Founder",
-				"description": "David Wilson is the founder of Startup 4. He is responsible for the initial idea and business development."
-			},
-			{
-				"name": "Jessica Lee",
-				"jobTitle": "CMO",
-				"description": "Jessica Lee is the CMO of Startup 4. She leads the marketing and branding efforts."
-			},
-			{
-				"name": "Alex Turner",
-				"jobTitle": "Lead Designer",
-				"description": "Alex Turner is the lead designer of Startup 4. He creates intuitive and visually appealing user interfaces."
-			}
-		]
-	},
-	{
-		"name": "Startup 5",
-		"description": "This is the description of Startup 5.",
-		"problems": "The problems addressed by Startup 5.",
-		"dangers": "The potential dangers involved with Startup 5.",
-		"solution": "The solution offered by Startup 5.",
-		"video_urls": "https://www.example.com/video5",
-		"team": [
-			{
-				"name": "Rachel Adams",
-				"jobTitle": "CEO",
-				"description": "Rachel Adams is the CEO of Startup 5. She provides strategic leadership and manages the overall operations of the company."
-			},
-			{
-				"name": "Daniel Clark",
-				"jobTitle": "CTO",
-				"description": "Daniel Clark is the CTO of Startup 5. He oversees the technical aspects and drives innovation within the company."
-			},
-			{
-				"name": "Lisa Martinez",
-				"jobTitle": "CMO",
-				"description": "Lisa Martinez is the CMO of Startup 5. She leads the marketing efforts and develops strategies to promote the company's products."
-			}
-		]
-	}
-]
+{
+	"startups": [
+		{
+			"startupName": "EcoVenture",
+			"startupDesc": "EcoVenture is an innovative startup focused on developing sustainable energy solutions for rural communities in Kenya.",
+			"startupCountry": "Kenya",
+			"startupCategory": "Renewable Energy",
+			"paypalLink": "https://www.paypal.me/ecoventure",
+			"goal": "To provide affordable and clean energy access to underserved communities in Kenya.",
+			"problemSolved": "EcoVenture addresses the lack of reliable and affordable energy sources in rural areas, reducing dependence on fossil fuels and improving living conditions.",
+			"dangers": ["Deforestation", "Energy poverty"],
+			"solution": "By harnessing solar and wind energy, EcoVenture installs decentralized renewable energy systems to power homes, schools, and health centers in remote areas.",
+			"videos": ["https://www.youtube.com/watch?v=jJpCB5Puubs", "https://www.youtube.com/watch?v=nwW6lGn-Tk4"],
+			"teamMembers": [
+				{
+					"name": "John Doe",
+					"title": "Co-founder",
+					"description": "John is a renewable energy expert with years of experience in implementing sustainable solutions in rural communities."
+				},
+				{
+					"name": "Jane Smith",
+					"title": "Engineer",
+					"description": "Jane specializes in designing and installing solar and wind energy systems for off-grid communities."
+				}
+			]
+		},
+		{
+			"startupName": "AgriClimate",
+			"startupDesc": "AgriClimate leverages climate data and technology to assist African farmers in adapting to changing weather patterns.",
+			"startupCountry": "Uganda",
+			"startupCategory": "Agriculture",
+			"paypalLink": "https://www.paypal.me/agriclimate",
+			"goal": "To improve agricultural productivity and resilience by providing farmers with accurate climate information and customized recommendations.",
+			"problemSolved": "AgriClimate helps farmers mitigate the risks associated with climate change, such as droughts, floods, and pest outbreaks, by optimizing farming practices.",
+			"dangers": ["Erratic rainfall", "Crop failure"],
+			"solution": "Through a mobile application and SMS alerts, AgriClimate delivers real-time weather forecasts, crop-specific advice, and market insights to empower farmers.",
+			"videos": ["https://www.youtube.com/watch?v=KLMNOPQRST", "https://www.youtube.com/watch?v=UVWXYZ1234"],
+			"teamMembers": [
+				{
+					"name": "David Ochieng",
+					"title": "CEO",
+					"description": "David is passionate about leveraging technology to build climate-resilient farming communities."
+				},
+				{
+					"name": "Grace Njoroge",
+					"title": "Data Scientist",
+					"description": "Grace analyzes climate data and develops algorithms to provide accurate and actionable insights for farmers."
+				}
+			]
+		},
+		{
+			"startupName": "WaterGuard",
+			"startupDesc": "WaterGuard is dedicated to ensuring clean and safe drinking water for communities in Nigeria through innovative filtration technologies.",
+			"startupCountry": "Nigeria",
+			"startupCategory": "Water & Sanitation",
+			"paypalLink": "https://www.paypal.me/waterguard",
+			"goal": "To reduce waterborne diseases and improve access to clean water by implementing affordable and efficient water filtration systems.",
+			"problemSolved": "WaterGuard addresses the contamination of water sources, reducing the prevalence of waterborne illnesses and promoting better health outcomes.",
+			"dangers": ["Water pollution", "Water scarcity"],
+			"solution": "Using advanced filtration techniques, WaterGuard develops portable and low-cost water filters that remove harmful pathogens, providing safe drinking water to communities in need.",
+			"videos": ["https://www.youtube.com/watch?v=LMNOPQRSTU"],
+			"teamMembers": [
+				{
+					"name": "Fatima Mohammed",
+					"title": "Co-founder",
+					"description": "Fatima is an expert in water treatment technologies and is committed to improving access to clean water in Nigeria."
+				},
+				{
+					"name": "Ibrahim Abubakar",
+					"title": "Operations Manager",
+					"description": "Ibrahim oversees the production and distribution of WaterGuard's water filtration devices."
+				}
+			]
+		},
+		{
+			"startupName": "CarbonZero",
+			"startupDesc": "CarbonZero is a carbon offsetting platform that enables African businesses and individuals to take climate action and reduce their carbon footprint.",
+			"startupCountry": "South Africa",
+			"startupCategory": "Carbon Offsetting",
+			"paypalLink": "https://www.paypal.me/carbonzero",
+			"goal": "To promote sustainable practices and combat climate change by facilitating carbon offsetting projects across Africa.",
+			"problemSolved": "CarbonZero helps organizations and individuals offset their carbon emissions, leading to a net reduction in greenhouse gas emissions.",
+			"dangers": ["Climate change", "Air pollution"],
+			"solution": "By partnering with reforestation projects, renewable energy initiatives, and sustainable agriculture, CarbonZero offers verified carbon credits that support climate-friendly activities.",
+			"videos": ["https://www.youtube.com/watch?v=VWXYZ12345"],
+			"teamMembers": [
+				{
+					"name": "Michael Smith",
+					"title": "Founder",
+					"description": "Michael is a sustainability advocate who strives to make carbon offsetting accessible and impactful."
+				},
+				{
+					"name": "Lerato Mabena",
+					"title": "Marketing Director",
+					"description": "Lerato raises awareness about carbon offsetting and drives engagement with CarbonZero's initiatives."
+				}
+			]
+		},
+		{
+			"startupName": "WasteWise",
+			"startupDesc": "WasteWise is a social enterprise dedicated to promoting waste management and recycling practices in Ghana.",
+			"startupCountry": "Ghana",
+			"startupCategory": "Waste Management",
+			"paypalLink": "https://www.paypal.me/wastewise",
+			"goal": "To reduce waste pollution, promote recycling, and create a circular economy in Ghana.",
+			"problemSolved": "WasteWise addresses the improper disposal of waste, reducing environmental contamination and creating economic opportunities through recycling.",
+			"dangers": ["Plastic pollution", "Landfill expansion"],
+			"solution": "Through community engagement and waste collection services, WasteWise educates citizens on proper waste management and establishes recycling facilities to minimize waste sent to landfills.",
+			"videos": ["https://www.youtube.com/watch?v=QRSTUVWXYZ12"],
+			"teamMembers": [
+				{
+					"name": "Kwame Mensah",
+					"title": "Co-founder",
+					"description": "Kwame is passionate about promoting sustainable waste management practices and building a circular economy in Ghana."
+				},
+				{
+					"name": "Ama Anokye",
+					"title": "Operations Manager",
+					"description": "Ama oversees waste collection and recycling operations, ensuring efficient and sustainable waste management practices."
+				}
+			]
+		},
+		{
+			"startupName": "GreenMobility",
+			"startupDesc": "GreenMobility is a transportation startup that aims to revolutionize urban mobility in Rwanda through electric vehicles and smart charging infrastructure.",
+			"startupCountry": "Rwanda",
+			"startupCategory": "Transportation",
+			"paypalLink": "https://www.paypal.me/greenmobility",
+			"goal": "To reduce carbon emissions from transportation and enhance accessibility by promoting electric mobility solutions.",
+			"problemSolved": "GreenMobility tackles air pollution and dependence on fossil fuels in urban areas, contributing to cleaner and more sustainable transportation.",
+			"dangers": ["Air pollution", "Traffic congestion"],
+			"solution": "By establishing a network of electric vehicle charging stations and offering electric car-sharing services, GreenMobility encourages the adoption of eco-friendly transportation options.",
+			"videos": ["https://www.youtube.com/watch?v=12345UVWXYZ"],
+			"teamMembers": [
+				{
+					"name": "Jeanine Uwimana",
+					"title": "CEO",
+					"description": "Jeanine is dedicated to transforming Rwanda's transportation landscape and promoting sustainable mobility solutions."
+				},
+				{
+					"name": "Emmanuel Nzabonimpa",
+					"title": "Chief Engineer",
+					"description": "Emmanuel leads the design and implementation of GreenMobility's electric vehicle infrastructure and charging network."
+				}
+			]
+		},
+		{
+			"startupName": "SolarCrop",
+			"startupDesc": "SolarCrop combines solar power and precision agriculture techniques to empower farmers in Tanzania and increase crop yields.",
+			"startupCountry": "Tanzania",
+			"startupCategory": "Agriculture",
+			"paypalLink": "https://www.paypal.me/solarcrop",
+			"goal": "To improve food security, enhance farming efficiency, and reduce the environmental impact of agriculture through solar-powered irrigation systems.",
+			"problemSolved": "SolarCrop addresses water scarcity and inefficient irrigation practices, enabling farmers to optimize water usage and improve agricultural productivity.",
+			"dangers": ["Drought", "Soil degradation"],
+			"solution": "Using solar panels and smart irrigation controllers, SolarCrop provides farmers with sustainable and affordable irrigation solutions, enabling them to grow crops more efficiently.",
+			"videos": ["https://www.youtube.com/watch?v=67890ABCDEF"],
+			"teamMembers": [
+				{
+					"name": "Isaac Kimaro",
+					"title": "Co-founder",
+					"description": "Isaac is committed to supporting Tanzanian farmers by harnessing solar energy for irrigation and promoting sustainable agricultural practices."
+				},
+				{
+					"name": "Esther Mwakalobo",
+					"title": "Agricultural Specialist",
+					"description": "Esther provides expertise in precision agriculture, helping farmers optimize crop production using solar-powered irrigation systems."
+				}
+			]
+		},
+		{
+			"startupName": "ClimateTech",
+			"startupDesc": "ClimateTech is a technology company that develops climate monitoring systems to assist African governments and organizations in making informed decisions.",
+			"startupCountry": "Senegal",
+			"startupCategory": "Climate Monitoring",
+			"paypalLink": "https://www.paypal.me/climatetech",
+			"goal": "To provide accurate climate data and analytical tools for effective climate change mitigation and adaptation strategies.",
+			"problemSolved": "ClimateTech helps policymakers and stakeholders address the challenges posed by climate change by providing reliable data and insights.",
+			"dangers": ["Sea-level rise", "Extreme weather events"],
+			"solution": "By deploying weather stations, satellite imagery, and data analytics, ClimateTech offers comprehensive climate monitoring solutions tailored to the needs of African countries.",
+			"videos": ["https://www.youtube.com/watch?v=GHIJKLMNOPQR"],
+			"teamMembers": [
+				{
+					"name": "Fatou Mbengue",
+					"title": "Co-founder",
+					"description": "Fatou is an expert in climate data analysis and works towards enhancing climate resilience in African countries."
+				},
+				{
+					"name": "Mamadou Diop",
+					"title": "Software Engineer",
+					"description": "Mamadou develops advanced data visualization tools and software solutions for ClimateTech's climate monitoring systems."
+				}
+			]
+		},
+		{
+			"startupName": "GreenHomes",
+			"startupDesc": "GreenHomes specializes in retrofitting existing buildings with energy-efficient technologies to reduce carbon emissions in Morocco.",
+			"startupCountry": "Morocco",
+			"startupCategory": "Energy Efficiency",
+			"paypalLink": "https://www.paypal.me/greenhomes",
+			"goal": "To promote sustainable building practices and decrease energy consumption in residential and commercial properties.",
+			"problemSolved": "GreenHomes addresses the high energy demand of buildings, reducing greenhouse gas emissions and lowering energy costs for occupants.",
+			"dangers": ["Energy waste", "Urban heat island effect"],
+			"solution": "Through energy audits and retrofits, GreenHomes improves insulation, installs efficient lighting and appliances, and integrates renewable energy systems to make buildings more eco-friendly.",
+			"videos": ["https://www.youtube.com/watch?v=STUVWXYZ1234"],
+			"teamMembers": [
+				{
+					"name": "Mohamed El Khatib",
+					"title": "Founder",
+					"description": "Mohamed is passionate about promoting energy-efficient buildings and sustainable architecture in Morocco."
+				},
+				{
+					"name": "Amina Benali",
+					"title": "Architect",
+					"description": "Amina specializes in designing and implementing green building solutions, contributing to a more sustainable built environment."
+				}
+			]
+		},
+		{
+			"startupName": "OceanGuard",
+			"startupDesc": "OceanGuard is a marine conservation startup that focuses on protecting coastal ecosystems and marine biodiversity in Mozambique.",
+			"startupCountry": "Mozambique",
+			"startupCategory": "Marine Conservation",
+			"paypalLink": "https://www.paypal.me/oceanguard",
+			"goal": "To preserve and restore coastal habitats, promote sustainable fishing practices, and raise awareness about the importance of ocean conservation.",
+			"problemSolved": "OceanGuard addresses overfishing, habitat degradation, and marine pollution, preserving biodiversity and supporting local fishing communities.",
+			"dangers": ["Coral bleaching", "Illegal fishing"],
+			"solution": "Through community engagement, scientific research, and marine protected area establishment, OceanGuard works towards sustainable management of coastal resources and the recovery of marine ecosystems.",
+			"videos": ["https://www.youtube.com/watch?v=UVWXYZ12345"],
+			"teamMembers": [
+				{
+					"name": "Carlos Silva",
+					"title": "Founder",
+					"description": "Carlos is committed to protecting Mozambique's coastal ecosystems and promoting sustainable fishing practices."
+				},
+				{
+					"name": "Isabel Mota",
+					"title": "Marine Biologist",
+					"description": "Isabel conducts research on marine biodiversity and collaborates with local communities to implement conservation initiatives."
+				}
+			]
+		}
+	]
+}
