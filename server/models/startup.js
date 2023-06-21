@@ -65,6 +65,11 @@ const startupSchema = new mongoose.Schema({
 			},
 		},
 	],
+	owner: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true,
+	},
 });
 const Startup = mongoose.model('Startup', startupSchema);
 

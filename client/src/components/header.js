@@ -34,6 +34,11 @@ const Header = () => {
 		// Redirect to the root directory
 		navigate('/');
 	};
+	console.log(user);
+
+	if (user) {
+		console.log(user._id);
+	}
 	// Gravetar avatars
 	// let gravatarUrl = ``;
 	// if (user) {

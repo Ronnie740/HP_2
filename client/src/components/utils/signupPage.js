@@ -3,12 +3,41 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import zxcvbn from 'zxcvbn'; // Importing zxcvbn library for password strength estimation
 
 const Signup = () => {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [name, setName] = useState('');
+	//For old password implentations
+	// const [password, setPassword] = useState('');
+
 	const [password, setPassword] = useState('');
+	const [passwordStrength, setPasswordStrength] = useState(0);
+	const [showPassword, setShowPassword] = useState(false);
+
+	const handlePasswordChange = (e) => {
+		const newPassword = e.target.value;
+		setPassword(newPassword);
+		setPasswordStrength(zxcvbn(newPassword).score); // Estimating password strength using zxcvbn library
+	};
+
+	const hasLowercase = /[a-z]/.test(password);
+	const hasUppercase = /[A-Z]/.test(password);
+	const hasNumber = /[0-9]/.test(password);
+	const hasSymbol = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/.test(password);
+
+	const getPasswordStrengthColor = () => {
+		if (passwordStrength === 0) return 'text-red-500';
+		if (passwordStrength === 1) return 'text-orange-500';
+		if (passwordStrength === 2) return 'text-yellow-500';
+		if (passwordStrength === 3) return 'text-blue-500';
+		if (passwordStrength === 4) return 'text-green-500';
+	};
+
+	const togglePasswordVisibility = () => {
+		setShowPassword(!showPassword);
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -57,7 +86,8 @@ const Signup = () => {
 							onChange={(e) => setName(e.target.value)}
 						/>
 					</div>
-					<div className='mb-4'>
+					{/* for old password */}
+					{/* <div className='mb-4'>
 						<label htmlFor='password' className='block mb-1'>
 							Password:
 						</label>
@@ -68,6 +98,34 @@ const Signup = () => {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
+					</div> */}
+					{/* New passwords with security measures */}
+					<div className='mb-4'>
+						<label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='password'>
+							Password
+						</label>
+						<div className='relative'>
+							<input
+								className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+								id='password'
+								type={showPassword ? 'text' : 'password'}
+								placeholder='Enter your password'
+								value={password}
+								onChange={handlePasswordChange}
+							/>
+							<button className='absolute top-0 right-0 mr-2 mt-2 text-gray-500 focus:outline-none' onClick={togglePasswordVisibility}>
+								{showPassword ? 'Hide' : 'Show'}
+							</button>
+						</div>
+					</div>
+					<div>
+						<p className={`text-sm mb-2 ${getPasswordStrengthColor()}`}>Password Strength: {passwordStrength === 0 ? 'Weak' : passwordStrength === 4 ? 'Strong' : 'Medium'}</p>
+						<ul className='list-disc ml-6'>
+							<li className={hasLowercase ? 'text-green-500' : 'text-red-500'}>At least one lowercase letter</li>
+							<li className={hasUppercase ? 'text-green-500' : 'text-red-500'}>At least one uppercase letter</li>
+							<li className={hasNumber ? 'text-green-500' : 'text-red-500'}>At least one number</li>
+							<li className={hasSymbol ? 'text-green-500' : 'text-red-500'}>At least one symbol</li>
+						</ul>
 					</div>
 					<button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors'>
 						Signup

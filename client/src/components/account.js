@@ -29,6 +29,32 @@ const Account = () => {
 
 		fetchUser();
 	}, []);
+	const [startup, setStartup] = useState(null);
+
+	useEffect(() => {
+		const fetchStartup = async () => {
+			try {
+				const response = await axios.get(`/startup?owner=${user._id}`);
+				if (response.data.length > 0) {
+					setStartup(response.data[0]);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		if (user) {
+			fetchStartup();
+		}
+	}, [user]);
+
+	const handleCreateStartup = () => {
+		navigate('/startup-registration');
+	};
+
+	const handleViewMyStartup = () => {
+		navigate(`/startup/${startup._id}`);
+	};
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
@@ -64,6 +90,21 @@ const Account = () => {
 						<button className='bg-red-500 text-white rounded-md py-2 px-4' onClick={handleDeleteAccount}>
 							Delete Account
 						</button>
+						{startup ? (
+							<div className='mt-4'>
+								<h3 className='text-lg font-semibold mb-2'>My Startup:</h3>
+								<button className='bg-primary hover:bg-button_active text-white rounded-md py-2 px-4' onClick={handleViewMyStartup}>
+									View My Startup
+								</button>
+							</div>
+						) : (
+							<div className='mt-4'>
+								<h3 className='text-lg font-semibold mb-2'>Create a Startup:</h3>
+								<button className='bg-primary hover:bg-button_active text-white rounded-md py-2 px-4' onClick={handleCreateStartup}>
+									Create Startup
+								</button>
+							</div>
+						)}
 					</div>
 				</>
 			)}

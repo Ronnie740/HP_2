@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // axios.defaults.baseURL = 'http://localhost:4000';
@@ -63,7 +63,28 @@ const StartupReg = () => {
 		solution: '',
 		videos: [],
 		teamMembers: [],
+		owner: '',
 	});
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		const fetchUser = async () => {
+			try {
+				const token = localStorage.getItem('token');
+				console.log('header token:', token);
+				if (token) {
+					const response = await axios.get('/getUserInfo', {
+						headers: { Authorization: token },
+					});
+					setUser(response.data);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchUser();
+	}, []);
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -165,13 +186,37 @@ const StartupReg = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		// Set the user ID as the owner of the startup data
+		// if (user) {
+		// 	console.log('User ID: ' + user._id);
+		// 	setStartupData((prevState) => ({
+		// 		...prevState,
+		// 		owner: user._id,
+		// 	}));
+		// }
+
 		// Send startupData to the server
-		console.log(startupData);
-		try {
-			const response = await axios.post('/startup', startupData);
-			console.log(response.data); // Handle the response as needed
-		} catch (error) {
-			console.error(error);
+		// console.log(startupData);
+		// try {
+		// 	const response = await axios.post('/startup', startupData);
+		// 	console.log(response.data); // Handle the response as needed
+		// } catch (error) {
+		// 	console.error(error);
+		// }
+		// Set the user ID as the owner of the startup data
+		if (user) {
+			console.log('User ID: ' + user._id);
+			const updatedStartupData = { ...startupData, owner: user._id };
+
+			// Send updatedStartupData to the server
+			console.log(updatedStartupData);
+			try {
+				const response = await axios.post('/startup', updatedStartupData);
+				console.log(response.data); // Handle the response as needed
+			} catch (error) {
+				console.error(error);
+			}
 		}
 		// Reset the form fields
 		setStartupData({
@@ -187,8 +232,12 @@ const StartupReg = () => {
 			solution: '',
 			videos: [],
 			teamMembers: [],
+			owner: '',
 		});
 	};
+	if (user) {
+		console.log('User log from Startup page' + user._id);
+	}
 
 	return (
 		<main className='mx-20 bg-slate-200 m-10 p-5 rounded-md shadow-lg'>

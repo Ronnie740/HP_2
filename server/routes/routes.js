@@ -52,6 +52,11 @@ router.post('/startup', async (req, res) => {
 	try {
 		const startupData = req.body;
 
+		// const user = req.user;
+		// startupData.owner = user._id;
+		// console.log(startupData.owner);
+		// console.log(startupData);
+
 		const newStartup = new Startup(startupData);
 		await newStartup.save();
 
@@ -98,6 +103,27 @@ router.get('/getUserInfo', auth.authenticateToken, async (req, res) => {
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: 'Server error' });
+	}
+});
+// Get a startup by owner
+router.get('/startup', async (req, res) => {
+	const { owner } = req.query;
+	try {
+		const startup = await Startup.find({ owner });
+		res.status(200).json(startup);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Failed to get startup' });
+	}
+});
+// Get all startups
+router.get('/startups', async (req, res) => {
+	try {
+		const startups = await Startup.find();
+		res.status(200).json(startups);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Failed to get startups' });
 	}
 });
 //error handling
