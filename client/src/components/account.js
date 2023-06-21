@@ -1,31 +1,55 @@
 /** @format */
 
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-// import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+// import md5 from 'md5';
 
 const Account = () => {
-	const { user, logout, deleteUser, isAuthenticated } = useAuth0();
-	// const history = useHistory();
+	// const { user, logout, deleteUser, isAuthenticated } = useAuth0();
+	const navigate = useNavigate();
+	const [user, setUser] = useState(null);
+	useEffect(() => {
+		const fetchUser = async () => {
+			try {
+				const token = localStorage.getItem('token');
+				console.log('header token:', token);
+				if (token) {
+					const response = await axios.get('/getUserInfo', {
+						headers: { Authorization: token },
+					});
+					setUser(response.data);
+				} else {
+					navigate('/login');
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchUser();
+	}, []);
 
 	const handleLogout = () => {
-		logout({ returnTo: window.location.origin });
+		localStorage.removeItem('token');
+		navigate('/');
 	};
 
 	const handleDeleteAccount = () => {
-		deleteUser({ returnTo: window.location.origin });
 		// history.push('/');
 	};
-	if (!isAuthenticated) {
-		return <div>Loading...</div>; // Render a loading state or redirect to a login page
+	if (!user) {
+		return <div>loading ...</div>; // Render a loading state or redirect to a login page
 	}
+
+	// const gravatarUrl = `https://www.gravatar.com/avatar/${md5(user.email)}?s=200`;
 
 	return (
 		<div className='max-w-lg mx-auto p-4'>
 			{user && (
 				<>
 					<div className='flex flex-col items-center mb-4'>
-						<img className='w-40 h-40 rounded-full mx-auto' src={user.picture} alt='Profile' />
+						<img className='w-40 h-40 rounded-full mx-auto' src='https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear' alt='Profile' />
 						<h2 className='text-xl font-bold'>{user.name}</h2>
 					</div>
 

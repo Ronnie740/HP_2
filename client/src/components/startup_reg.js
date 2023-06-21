@@ -168,7 +168,7 @@ const StartupReg = () => {
 		// Send startupData to the server
 		console.log(startupData);
 		try {
-			const response = await axios.post('/startups', startupData);
+			const response = await axios.post('/startup', startupData);
 			console.log(response.data); // Handle the response as needed
 		} catch (error) {
 			console.error(error);

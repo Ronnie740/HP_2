@@ -1,10 +1,37 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import health from '../images/health.jpeg';
 import rainsforest from '../images/rain_forest.jpeg';
 import money from '../images/money.jpeg';
 import Card from './card';
+
+import axios from 'axios';
+
+const StartupCards = () => {
+	const [startups, setStartups] = useState([]);
+
+	useEffect(() => {
+		const fetchStartups = async () => {
+			try {
+				const response = await axios.get('/topStartups');
+				setStartups(response.data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchStartups();
+	}, []);
+
+	return (
+		<div>
+			{startups.map((startup) => (
+				<Card key={startup._id} name={startup.name} imgSrc={startup.image} imgAlt={startup.name} description={startup.description} />
+			))}
+		</div>
+	);
+};
 
 const Tabs = ({ imageSrc, altText, description }) => {
 	return (
@@ -82,9 +109,7 @@ const Home = () => {
 			<section className='w-full my-10'>
 				<h1 className='flex justify-center text-3xl font-bold'>Top Startups</h1>
 				<div className='grid grid-cols-3 gap-20 w-full mt-10'>
-					<Card name={'Startup 1'} imgSrc={health} imgAlt={'Startup 1'} description={'Description'} />
-					<Card name={'Startup 2'} imgSrc={rainsforest} imgAlt={'Startup 2'} description={'Description'} />
-					<Card name={'Startup 3'} imgSrc={money} imgAlt={'Startup 3'} description={'Description'} />
+					<StartupCards />
 				</div>
 			</section>
 		</main>
