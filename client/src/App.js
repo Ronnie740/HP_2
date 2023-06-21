@@ -1,5 +1,7 @@
 /** @format */
 
+/** @format */
+
 import './App.css';
 import Footer from './components/footer';
 import Header from './components/header';
@@ -13,11 +15,13 @@ import Startup from './components/startup';
 import StartupReg from './components/startup_reg';
 import Account from './components/account';
 import NotFound from './components/utils/404';
+import Login from './components/utils/loginPage';
+import Signup from './components/utils/signupPage';
 
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
-import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
-import Login from './components/utils/login';
+// import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
+// import Login from './components/utils/login';
 
 // const auth0Domain = process.env.REACT_APP_AUTH0_DOMAIN;
 // const auth0ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -46,46 +50,35 @@ function App() {
 	// useEffect(() => {
 	// 	// Save authentication state whenever it changes
 	// 	localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
-	// }, [isAuthenticated]);
-	const { isAuthenticated } = useAuth0();
-
-	{
-		isAuthenticated ? localStorage.setItem('isAuthenticated', 'true') : localStorage.setItem('isAuthenticated', 'false');
-	}
-
-	console.log('Local storage is Authenticated:' + localStorage.getItem('isAuthenticated'));
-	console.log('Auth0 is authenticated:' + isAuthenticated);
+	// // }, [isAuthenticated]);
 	// const { isAuthenticated } = useAuth0();
-	// const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState(false);
 
-	// useEffect(() => {
-	// 	setIsAuthenticatedLocal(isAuthenticated);
-	// }, [isAuthenticated]);
+	// // {
+	// // 	isAuthenticated ? localStorage.setItem('isAuthenticated', 'true') : localStorage.setItem('isAuthenticated', 'false');
+	// // }
 
-	// useEffect(() => {
-	// 	localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticatedLocal));
-	// }, [isAuthenticatedLocal]);
-
-	// console.log('Local storage is Authenticated:' + isAuthenticatedLocal);
+	// // console.log('Local storage is Authenticated:' + localStorage.getItem('isAuthenticated'));
 	// console.log('Auth0 is authenticated:' + isAuthenticated);
 	return (
-		<Auth0Provider domain={auth0Domain} clientId={auth0ClientId} redirectUri={window.location.origin}>
-			<Router>
-				<Header />
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/about' element={<About />} />
-					<Route path='/discover' element={<Discover />} />
-					<Route path='/contact' element={<Contact />} />
-					<Route path='/facts' element={<Facts />} />
-					<Route path='/startup' element={<Startup />} />
-					<Route path='/startup_registration' element={<StartupReg />} />
-					<Route path='/account' element={<Account />} />
-					<Route path='*' element={<NotFound />} />
-				</Routes>
-				<Footer />
-			</Router>
-		</Auth0Provider>
+		// <Auth0Provider domain={auth0Domain} clientId={auth0ClientId} redirectUri={window.location.origin}>
+		<Router>
+			<Header />
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/about' element={<About />} />
+				<Route path='/discover' element={<Discover />} />
+				<Route path='/contact' element={<Contact />} />
+				<Route path='/facts' element={<Facts />} />
+				<Route path='/startup' element={<Startup />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/signup' element={<Signup />} />
+				<Route path='/startup_registration' element={<StartupReg />} />
+				<Route path='/account' element={<Account />} />
+				<Route path='*' element={<NotFound />} />
+			</Routes>
+			<Footer />
+		</Router>
+		// </Auth0Provider>
 	);
 }
 
