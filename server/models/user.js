@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Startup' }],
 	// Add more fields as per your requirements
 });
 

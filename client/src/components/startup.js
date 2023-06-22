@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import money from '../images/money.jpeg';
 import Tabs from './tabs';
 import ReactPlayer from 'react-player';
@@ -10,7 +10,7 @@ import Danger_2 from '../images/danger_2.jpg';
 import Button from './button';
 import axios from 'axios';
 import useFetchUser from './useFetchUser';
-
+import AddToFavoritesButton from './utils/addToFavourites';
 const ProgressBar = ({ value, maxValue }) => {
 	const progress = (value / maxValue) * 100;
 
@@ -26,7 +26,7 @@ const StartupTemplate = () => {
 	const [newPostTitle, setNewPostTitle] = useState('');
 	const [newPostContent, setNewPostContent] = useState('');
 	const [posts, setPosts] = useState([]);
-
+	const navigate = useNavigate();
 	const fetchPosts = async () => {
 		try {
 			const response = await axios.get(`/startup/${id}/posts`);
@@ -119,7 +119,9 @@ const StartupTemplate = () => {
 			console.error(error);
 		}
 	};
-
+	function redirectToLogin() {
+		navigate('/login');
+	}
 	if (!startup) {
 		return <div>Loading...</div>;
 	}
@@ -153,7 +155,8 @@ const StartupTemplate = () => {
 						<h2 className='text-2xl'>Goal</h2>
 						<p className='text-xl font-semibold'>{goal}</p>
 						<div className='w-full justify-center'>
-							<button className='w-fit bg-primary hover:bg-button_active px-5 py-3 text-white rounded-md font-semibold'>Add to favourites</button>
+							{/* <button className='w-fit bg-primary hover:bg-button_active px-5 py-3 text-white rounded-md font-semibold'>Add to favourites</button> */}
+							{user ? <AddToFavoritesButton userId={user._id} startupId={startup._id} /> : ''}
 						</div>
 					</div>
 				</div>

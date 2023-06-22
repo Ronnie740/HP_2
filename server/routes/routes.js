@@ -136,7 +136,30 @@ router.get('/startup', async (req, res) => {
 		res.status(500).json({ error: 'Failed to get startup' });
 	}
 });
+// Get followed startups for a user
+router.get('/users/:userId/followed-startups', async (req, res) => {
+	const { userId } = req.params;
 
+	try {
+		// Find the user by ID
+		const user = await User.findById(userId);
+
+		if (!user) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+
+		// Get the followed startup IDs for the user
+		const followedStartupIds = user.favorites;
+
+		// Find the startups based on the followed startup IDs
+		const followedStartups = await Startup.find({ _id: { $in: followedStartupIds } });
+
+		res.json(followedStartups);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
 // Get all startups
 router.get('/startups', async (req, res) => {
 	try {
@@ -245,6 +268,88 @@ router.delete('/startup/:id/posts/:postId', async (req, res) => {
 		}
 
 		res.json({ message: 'Post deleted' });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+
+router.get('/users/:userId/favorites/:startupId', async (req, res) => {
+	const { userId, startupId } = req.params;
+
+	try {
+		const user = await User.findById(userId);
+
+		if (!user) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+
+		const isFavorite = user.favorites.includes(startupId);
+
+		res.json({ isFavorite });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+// Update a startup to be a user's favorite
+router.put('/users/:userId/favorites/:startupId', async (req, res) => {
+	const { userId, startupId } = req.params;
+
+	try {
+		const user = await User.findById(userId);
+		const startup = await Startup.findById(startupId);
+
+		if (!user || !startup) {
+			return res.status(404).json({ error: 'User or startup not found' });
+		}
+
+		// Check if the startup is already in the user's favorites
+		const isFavorite = user.favorites.includes(startupId);
+		// Check if the startup is already in the user's favorites
+		const isFollower = startup.followers.includes(userId);
+
+		if (isFavorite) {
+			return res.status(400).json({ error: 'Startup is already in favorites' });
+		}
+		if (isFollower) {
+			return res.status(400).json({ error: 'User is already in followers' });
+		}
+
+		// Add the startup to the user's favorites
+		user.favorites.push(startupId);
+		await user.save();
+
+		// Add the user to the startup's followers
+		startup.followers.push(userId);
+		await startup.save();
+
+		res.json({ message: 'Startup added to favorites' });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+router.delete('/users/:userId/favorites/:startupId', async (req, res) => {
+	const { userId, startupId } = req.params;
+
+	try {
+		const user = await User.findById(userId);
+		const startup = await Startup.findById(startupId);
+
+		if (!user || !startup) {
+			return res.status(404).json({ error: 'User or startup not found' });
+		}
+
+		// Remove the startup ID from the user's favorites array
+		user.favorites = user.favorites.filter((favorite) => favorite.toString() !== startupId);
+		await user.save();
+
+		// Remove the user from the startup's followers array
+		startup.followers = startup.followers.filter((follower) => follower.toString() !== userId);
+		await startup.save();
+
+		res.json({ message: 'Startup removed from favorites' });
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: 'Server error' });

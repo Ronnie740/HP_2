@@ -70,6 +70,7 @@ const startupSchema = new mongoose.Schema({
 		ref: 'User',
 		required: true,
 	},
+	followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 const Startup = mongoose.model('Startup', startupSchema);
 

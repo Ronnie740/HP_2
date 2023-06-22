@@ -30,7 +30,7 @@ const Account = () => {
 		fetchUser();
 	}, []);
 	const [startup, setStartup] = useState(null);
-
+	const [followedStartups, setFollowedStartups] = useState([]);
 	useEffect(() => {
 		const fetchStartup = async () => {
 			try {
@@ -43,8 +43,19 @@ const Account = () => {
 			}
 		};
 
+		const fetchFollowed = async () => {
+			try {
+				const response = await axios.get(`/users/${user._id}/followed-startups`);
+				if (response.data.length > 0) {
+					setFollowedStartups(response.data);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		};
 		if (user) {
 			fetchStartup();
+			fetchFollowed();
 		}
 	}, [user]);
 
@@ -81,6 +92,14 @@ const Account = () => {
 
 					<h3 className='text-lg font-semibold mb-2'>Followed Startups:</h3>
 					{/* Render the followed startups section */}
+					<div className='my-5 space-y-4'>
+						{followedStartups.map((startup) => (
+							<div key={startup._id} className='text-center flex flex-col bg-slate-300 rounded-md'>
+								<h1 className='text-2xl font-bold'>{startup.startupName}</h1>
+								<p className='text-xl font-semibold'>{startup.startupDesc}</p>
+							</div>
+						))}
+					</div>
 					{/* Replace with your own implementation */}
 					<div className='flex flex-col'>
 						<button className='bg-primary hover:bg-button_active text-white rounded-md py-2 px-4 mb-2' onClick={handleLogout}>

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from './card';
 import axios from 'axios';
+import money from '../images/money.jpeg';
 
 // const ProgressBar = ({ value, maxValue }) => {
 // 	const progress = (value / maxValue) * 100;
@@ -216,7 +217,7 @@ const Discover = () => {
 			{/* startups being displayed dynamically */}
 			<section className='grid grid-cols-2 gap-10 my-10'>
 				{filteredStartups.map((startup, index) => (
-					<Card key={index} imgSrc='' imgAlt={startup.startupName} name={startup.startupName} description={startup.startupDesc} height={'h-[500px]'} link={`/startup/${startup._id}`} />
+					<Card key={index} imgSrc={money} imgAlt={startup.startupName} name={startup.startupName} description={startup.startupDesc} height={'h-[500px]'} link={`/startup/${startup._id}`} />
 				))}
 			</section>
 		</main>
