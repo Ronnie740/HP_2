@@ -8,31 +8,6 @@ import Card from './card';
 
 import axios from 'axios';
 
-const StartupCards = () => {
-	const [startups, setStartups] = useState([]);
-
-	useEffect(() => {
-		const fetchStartups = async () => {
-			try {
-				const response = await axios.get('/topStartups');
-				setStartups(response.data);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
-		fetchStartups();
-	}, []);
-
-	return (
-		<div>
-			{startups.map((startup) => (
-				<Card key={startup._id} name={startup.startupName} imgSrc={money} imgAlt={startup.startupName} description={startup.startupDesc} link={`/startup/${startup._id}`} />
-			))}
-		</div>
-	);
-};
-
 const Tabs = ({ imageSrc, altText, description }) => {
 	return (
 		<div className='flex flex-col'>
@@ -68,6 +43,21 @@ const Highlight = ({ number, title }) => {
 // 	);
 // };
 const Home = () => {
+	const [startups, setStartups] = useState([]);
+
+	useEffect(() => {
+		const fetchStartups = async () => {
+			try {
+				const response = await axios.get('/topStartups');
+				setStartups(response.data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchStartups();
+	}, []);
+
 	return (
 		<main className=' flex flex-col mx-20 my-10'>
 			{/*Mission Statement*/}
@@ -109,7 +99,9 @@ const Home = () => {
 			<section className='w-full my-10'>
 				<h1 className='flex justify-center text-3xl font-bold'>Top Startups</h1>
 				<div className='grid grid-cols-3 gap-20 w-full mt-10'>
-					<StartupCards />
+					{startups.map((startup) => (
+						<Card key={startup._id} name={startup.startupName} imgSrc={money} imgAlt={startup.startupName} description={startup.startupDesc} link={`/startup/${startup._id}`} />
+					))}
 				</div>
 			</section>
 		</main>

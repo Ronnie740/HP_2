@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 // axios.defaults.baseURL = 'http://localhost:4000';
@@ -66,6 +67,7 @@ const StartupReg = () => {
 		owner: '',
 	});
 	const [user, setUser] = useState(null);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -217,6 +219,7 @@ const StartupReg = () => {
 			} catch (error) {
 				console.error(error);
 			}
+			navigate(`/account`);
 		}
 		// Reset the form fields
 		setStartupData({

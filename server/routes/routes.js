@@ -194,6 +194,63 @@ router.get('/startup/:id/posts', async (req, res) => {
 		res.status(500).json({ error: 'Server error' });
 	}
 });
+// Get a specific post for a startup
+router.get('/startup/:id/posts/:postId', async (req, res) => {
+	const { id, postId } = req.params;
+
+	try {
+		const post = await Post.findOne({ _id: postId, startup: id });
+
+		if (!post) {
+			return res.status(404).json({ error: 'Post not found' });
+		}
+
+		res.json(post);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+// Update a post
+router.put('/startup/:id/posts/:postId', async (req, res) => {
+	const { id, postId } = req.params;
+	const { title, content } = req.body;
+	console.log(title, content);
+	try {
+		const post = await Post.findOne({ _id: postId, startup: id });
+
+		if (!post) {
+			return res.status(404).json({ error: 'Post not found' });
+		}
+
+		post.title = title;
+		post.content = content;
+		await post.save();
+
+		res.json(post);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+// Delete a post
+router.delete('/startup/:id/posts/:postId', async (req, res) => {
+	const { id, postId } = req.params;
+
+	try {
+		const result = await Post.deleteOne({ _id: postId, startup: id });
+
+		if (result.deletedCount === 0) {
+			return res.status(404).json({ error: 'Post not found' });
+		}
+
+		res.json({ message: 'Post deleted' });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+
 //error handling
 router.use(function (req, res) {
 	res.status(404);

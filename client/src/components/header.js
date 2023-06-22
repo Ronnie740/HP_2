@@ -31,6 +31,8 @@ const Header = () => {
 		// Perform logout actions (e.g., clearing token from localStorage)
 		// and redirect to the logout page or desired location
 		localStorage.removeItem('token');
+		// Refresh the user state to null
+		setUser(null);
 		// Redirect to the root directory
 		navigate('/');
 	};

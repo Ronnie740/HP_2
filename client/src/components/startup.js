@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import money from '../images/money.jpeg';
 import Tabs from './tabs';
 import ReactPlayer from 'react-player';
-import Man from '../images/man.jpeg';
-import Woman from '../images/woman.jpeg';
+import Danger_1 from '../images/danger_1.jpg';
+import Danger_2 from '../images/danger_2.jpg';
 import Button from './button';
 import axios from 'axios';
 import useFetchUser from './useFetchUser';
@@ -15,8 +15,8 @@ const ProgressBar = ({ value, maxValue }) => {
 	const progress = (value / maxValue) * 100;
 
 	return (
-		<div className='w-40 h-5 bg-white rounded-full overflow-hidden'>
-			<div className='h-full bg-blue-500 rounded-full ' style={{ width: `${progress}%` }} />
+		<div className='w-40 h-7 bg-white rounded-full overflow-hidden p-1'>
+			<div className='h-full bg-blue-500 rounded-full' style={{ width: `${progress}%` }} />
 		</div>
 	);
 };
@@ -25,8 +25,16 @@ const StartupTemplate = () => {
 	const [startup, setStartup] = useState(null);
 	const [newPostTitle, setNewPostTitle] = useState('');
 	const [newPostContent, setNewPostContent] = useState('');
-	const [posts, setPosts] = useState(null);
+	const [posts, setPosts] = useState([]);
 
+	const fetchPosts = async () => {
+		try {
+			const response = await axios.get(`/startup/${id}/posts`);
+			setPosts(response.data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 	useEffect(() => {
 		const fetchStartup = async () => {
 			try {
@@ -37,18 +45,52 @@ const StartupTemplate = () => {
 				console.error(error);
 			}
 		};
-		const fetchPosts = async () => {
-			try {
-				const response = await axios.get(`/startup/${id}/posts`);
-				setPosts(response.data);
-			} catch (error) {
-				console.error(error);
-			}
-		};
 
 		fetchStartup();
 		fetchPosts();
 	}, [id]);
+
+	const updatePost = async (postId) => {
+		// Implement the logic to update the post
+		try {
+			// Fetch the post details from the backend (optional)
+			const response = await axios.get(`/startup/${id}/posts/${postId}`);
+			const post = response.data;
+			console.log(`Post details`, post);
+			// Prompt the user to enter updated title and content (you can use a modal or a form)
+			const updatedTitle = prompt('Enter updated title:', post.title);
+			const updatedContent = prompt('Enter updated content:', post.content);
+
+			// Send a PUT request to update the post
+			await axios.put(`/startup/${id}/posts/${postId}`, {
+				title: updatedTitle,
+				content: updatedContent,
+			});
+
+			// Refresh the posts list or update the specific post in the state
+			fetchPosts();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const deletePost = async (postId) => {
+		// Implement the logic to delete the post
+		try {
+			// Confirm with the user before deleting the post
+			const confirmed = window.confirm('Are you sure you want to delete this post?');
+
+			if (confirmed) {
+				// Send a DELETE request to delete the post
+				await axios.delete(`/startup/${id}/posts/${postId}`);
+
+				// Refresh the posts list or remove the specific post from the state
+				fetchPosts();
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const user = useFetchUser();
 
@@ -62,7 +104,15 @@ const StartupTemplate = () => {
 			const newPost = response.data;
 			// setPosts((prevPosts) => [...prevPosts, newPost]);
 			// Check if posts array is null before spreading
-			setPosts((prevPosts) => (prevPosts !== null ? [...prevPosts, newPost] : [newPost]));
+			// setPosts((prevPosts) => (prevPosts !== null ? [...prevPosts, newPost] : [newPost]));
+			// setPosts((prevPosts) => {
+			// 	if (!prevPosts) {
+			// 		return [newPost];
+			// 	} else {
+			// 		return [...prevPosts, newPost];
+			// 	}
+			// });
+			fetchPosts();
 			setNewPostTitle('');
 			setNewPostContent('');
 		} catch (error) {
@@ -120,7 +170,7 @@ const StartupTemplate = () => {
 					<div className='grid grid-cols-2 gap-5 mx-auto w-1/2 my-5'>
 						{dangers.map((danger, index) => (
 							<div className='flex mx-auto' key={index}>
-								<Tabs title={danger} imageSrc='' />
+								<Tabs title={danger} imageSrc={Danger_1} height={'h-60'} />
 							</div>
 						))}
 					</div>
@@ -162,7 +212,7 @@ const StartupTemplate = () => {
 				<div className='p-5 text-center'>
 					<h1 className='text-2xl font-semibold'>Posts</h1>
 					{user && user._id === startup.owner ? (
-						<div className=' space-y-10 mt-5'>
+						<div className='space-y-10 mt-5'>
 							{/* Render existing posts */}
 							{posts.length > 0 ? (
 								<div className='flex flex-col space-y-5'>
@@ -170,6 +220,14 @@ const StartupTemplate = () => {
 										<div className='mx-auto bg-slate-300 rounded-md p-5' key={post._id}>
 											<h2 className='text-2xl font-bold underline'>{post.title}</h2>
 											<p>{post.content}</p>
+											<div className='flex space-x-2'>
+												<button className='bg-primary hover:bg-button_active p-2 text-white font-semibold rounded-md' onClick={() => updatePost(post._id)}>
+													Edit
+												</button>
+												<button className='bg-red-500 hover:bg-red-600 p-2 text-white font-semibold rounded-md' onClick={() => deletePost(post._id)}>
+													Delete
+												</button>
+											</div>
 										</div>
 									))}
 								</div>

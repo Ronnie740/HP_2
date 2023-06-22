@@ -119,6 +119,7 @@ const About = () => {
 						description={
 							'He is a software developer from Kenya who believes that climate change is a pressing issue and fostering a symbiotic relationship between startups and the community at large will be necessary to find long lasting solutions'
 						}
+						height={'h-60'}
 					/>
 				</div>
 			</div>

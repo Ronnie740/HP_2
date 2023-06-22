@@ -49,7 +49,7 @@ const Account = () => {
 	}, [user]);
 
 	const handleCreateStartup = () => {
-		navigate('/startup-registration');
+		navigate('/startup_registration');
 	};
 
 	const handleViewMyStartup = () => {
