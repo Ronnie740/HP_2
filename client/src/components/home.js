@@ -27,7 +27,7 @@ const StartupCards = () => {
 	return (
 		<div>
 			{startups.map((startup) => (
-				<Card key={startup._id} name={startup.name} imgSrc={startup.image} imgAlt={startup.name} description={startup.description} />
+				<Card key={startup._id} name={startup.startupName} imgSrc={money} imgAlt={startup.startupName} description={startup.startupDesc} link={`/startup/${startup._id}`} />
 			))}
 		</div>
 	);

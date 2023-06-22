@@ -1,7 +1,9 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from './card';
+import axios from 'axios';
 
 // const ProgressBar = ({ value, maxValue }) => {
 // 	const progress = (value / maxValue) * 100;
@@ -75,9 +77,12 @@ const data = [
 	},
 ];
 
-const Dropdown = ({ options, onSelect }) => {
+const Dropdown = ({ options, selectedValue, onSelect }) => {
 	return (
-		<select className='border rounded px-4 py-2 bg-primary text-white font-bold hover:bg-button_active cursor-pointer' onChange={(e) => onSelect(e.target.value)}>
+		<select
+			className='border rounded px-4 py-2 bg-primary text-white font-bold hover:bg-button_active cursor-pointer'
+			onChange={(e) => onSelect(e.target.value)}
+			value={options.find((option) => option.value === selectedValue)?.label || ''}>
 			{options.map((option) => (
 				<option key={option.value} value={option.value}>
 					{option.label}
@@ -87,23 +92,84 @@ const Dropdown = ({ options, onSelect }) => {
 	);
 };
 
+// const Discover = () => {
+// 	const [selectedCategory, setSelectedCategory] = useState('');
+// 	const [selectedLocation, setSelectedLocation] = useState('');
+
+// 	const categoryOptions = [
+// 		{ value: '', label: 'Choose Category' },
+// 		{ value: '1', label: 'Category 1' },
+// 		{ value: '2', label: 'Category 2' },
+// 		{ value: '3', label: 'Category 3' },
+// 	];
+
+// 	const locationOptions = [
+// 		{ value: '', label: 'Choose location' },
+// 		{ value: 'london', label: 'London' },
+// 		{ value: 'paris', label: 'Paris' },
+// 		{ value: 'new-york', label: 'New York' },
+// 	];
+// 	const handleCategorySelect = (value) => {
+// 		setSelectedCategory(value);
+// 	};
+
+// 	const handleLocationSelect = (value) => {
+// 		setSelectedLocation(value);
+// 	};
+// 	const [objects, setObjects] = useState(data);
+// 	return (
+// 		<main className='mx-20'>
+// 			{/* categories and location dropdowns */}
+// 			<section className='flex space-x-10 text-center my-10'>
+// 				<div className='flex flex-col'>
+// 					<Dropdown options={categoryOptions} onSelect={handleCategorySelect} />
+// 					{/* <p>Selected Category: {selectedCategory}</p> */}
+// 				</div>
+
+// 				<div className='flex flex-col'>
+// 					<Dropdown options={locationOptions} onSelect={handleLocationSelect} />
+// 					{/* <p>Selected Location: {selectedLocation}</p> */}
+// 				</div>
+// 			</section>
+
+// 			{/* startups being displayed dynamicaly */}
+// 			<section className='grid grid-cols-2 gap-10 my-10'>
+// 				{objects.map((objects, index) => (
+// 					<Card imgSrc={objects.imgSrc} imgAlt={objects.imgSrc} name={objects.name} description={objects.description} height={'h-[500px]'} />
+// 				))}
+// 			</section>
+// 		</main>
+// 	);
+// };
+
+// export default Discover;
 const Discover = () => {
 	const [selectedCategory, setSelectedCategory] = useState('');
 	const [selectedLocation, setSelectedLocation] = useState('');
+	const [startups, setStartups] = useState([]);
+	const [categories, setCategories] = useState([]);
+	const [locations, setLocations] = useState([]);
 
-	const categoryOptions = [
-		{ value: '', label: 'Choose Category' },
-		{ value: '1', label: 'Category 1' },
-		{ value: '2', label: 'Category 2' },
-		{ value: '3', label: 'Category 3' },
-	];
+	useEffect(() => {
+		const fetchStartups = async () => {
+			try {
+				const response = await axios.get('/startups');
+				setStartups(response.data);
+				console.log(response.data);
+				const allCategories = response.data.map((startup) => startup.startupCategory);
+				const uniqueCategories = [...new Set(allCategories)];
+				setCategories(uniqueCategories);
+				const allLocations = response.data.map((startup) => startup.startupCountry);
+				const uniqueLocations = [...new Set(allLocations)];
+				setLocations(uniqueLocations);
+			} catch (error) {
+				console.error(error);
+			}
+		};
 
-	const locationOptions = [
-		{ value: '', label: 'Choose location' },
-		{ value: 'london', label: 'London' },
-		{ value: 'paris', label: 'Paris' },
-		{ value: 'new-york', label: 'New York' },
-	];
+		fetchStartups();
+	}, []);
+
 	const handleCategorySelect = (value) => {
 		setSelectedCategory(value);
 	};
@@ -111,26 +177,46 @@ const Discover = () => {
 	const handleLocationSelect = (value) => {
 		setSelectedLocation(value);
 	};
-	const [objects, setObjects] = useState(data);
+
+	const filteredStartups = startups.filter(
+		(startup) => (selectedCategory === '' || startup.startupCategory === selectedCategory) && (selectedLocation === '' || startup.startupCountry === selectedLocation)
+	);
+
+	const resetFilters = () => {
+		setSelectedCategory('');
+		setSelectedLocation('');
+	};
+
 	return (
 		<main className='mx-20'>
 			{/* categories and location dropdowns */}
 			<section className='flex space-x-10 text-center my-10'>
 				<div className='flex flex-col'>
-					<Dropdown options={categoryOptions} onSelect={handleCategorySelect} />
-					{/* <p>Selected Category: {selectedCategory}</p> */}
+					<Dropdown
+						options={[{ value: '', label: 'Choose Category' }, ...categories.map((category) => ({ value: category, label: category }))]}
+						selectedValue={selectedCategory}
+						onSelect={handleCategorySelect}
+					/>
 				</div>
 
 				<div className='flex flex-col'>
-					<Dropdown options={locationOptions} onSelect={handleLocationSelect} />
-					{/* <p>Selected Location: {selectedLocation}</p> */}
+					<Dropdown
+						options={[{ value: '', label: 'Choose location' }, ...locations.map((location) => ({ value: location, label: location }))]}
+						selectedValue={selectedLocation}
+						onSelect={handleLocationSelect}
+					/>
 				</div>
+				{selectedCategory !== '' || selectedLocation !== '' ? (
+					<button className='bg-primary hover:bg-button_active text-white rounded-md py-2 px-4' onClick={resetFilters}>
+						Reset Filters
+					</button>
+				) : null}
 			</section>
 
-			{/* startups being displayed dynamicaly */}
+			{/* startups being displayed dynamically */}
 			<section className='grid grid-cols-2 gap-10 my-10'>
-				{objects.map((objects, index) => (
-					<Card imgSrc={objects.imgSrc} imgAlt={objects.imgSrc} name={objects.name} description={objects.description} height={'h-[500px]'} />
+				{filteredStartups.map((startup, index) => (
+					<Card key={index} imgSrc='' imgAlt={startup.startupName} name={startup.startupName} description={startup.startupDesc} height={'h-[500px]'} link={`/startup/${startup._id}`} />
 				))}
 			</section>
 		</main>

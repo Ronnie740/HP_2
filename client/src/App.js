@@ -11,7 +11,8 @@ import About from './components/about';
 import Contact from './components/contact';
 import Discover from './components/discover';
 import Facts from './components/facts';
-import Startup from './components/startup';
+// import Startup from './components/startup';
+import StartupTemplate from './components/startup';
 import StartupReg from './components/startup_reg';
 import Account from './components/account';
 import NotFound from './components/utils/404';
@@ -69,7 +70,8 @@ function App() {
 				<Route path='/discover' element={<Discover />} />
 				<Route path='/contact' element={<Contact />} />
 				<Route path='/facts' element={<Facts />} />
-				<Route path='/startup' element={<Startup />} />
+				{/* <Route path='/startup' element={<Startup />} /> */}
+				<Route path='/startup/:id' element={<StartupTemplate />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/signup' element={<Signup />} />
 				<Route path='/startup_registration' element={<StartupReg />} />
