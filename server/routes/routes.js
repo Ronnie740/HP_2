@@ -147,6 +147,53 @@ router.get('/startups', async (req, res) => {
 		res.status(500).json({ error: 'Failed to get startups' });
 	}
 });
+
+// Create a new post for a startup
+router.post('/startup/:id/posts', auth.authenticateToken, async (req, res) => {
+	const { id } = req.params;
+	const { title, content } = req.body;
+
+	try {
+		const startup = await Startup.findById(id);
+
+		if (!startup) {
+			return res.status(404).json({ error: 'Startup not found' });
+		}
+		console.log('Startup Owner', startup.owner.toString());
+		console.log(req.user.userId);
+
+		// Check if the user is the owner of the startup
+		if (req.user.userId !== startup.owner.toString()) {
+			return res.status(403).json({ error: 'Access denied' });
+		}
+
+		const post = new Post({ title, content, startup: id });
+		await post.save();
+
+		res.status(201).json(post);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+
+// Get all posts for a startup
+router.get('/startup/:id/posts', async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const posts = await Post.find({ startup: id });
+
+		if (posts.length === 0) {
+			return res.json({ message: 'No posts yet' });
+		}
+
+		res.json(posts);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
 //error handling
 router.use(function (req, res) {
 	res.status(404);

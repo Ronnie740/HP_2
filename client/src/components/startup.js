@@ -9,6 +9,7 @@ import Man from '../images/man.jpeg';
 import Woman from '../images/woman.jpeg';
 import Button from './button';
 import axios from 'axios';
+import useFetchUser from './useFetchUser';
 
 const ProgressBar = ({ value, maxValue }) => {
 	const progress = (value / maxValue) * 100;
@@ -22,6 +23,9 @@ const ProgressBar = ({ value, maxValue }) => {
 const StartupTemplate = () => {
 	const { id } = useParams();
 	const [startup, setStartup] = useState(null);
+	const [newPostTitle, setNewPostTitle] = useState('');
+	const [newPostContent, setNewPostContent] = useState('');
+	const [posts, setPosts] = useState(null);
 
 	useEffect(() => {
 		const fetchStartup = async () => {
@@ -33,9 +37,38 @@ const StartupTemplate = () => {
 				console.error(error);
 			}
 		};
+		const fetchPosts = async () => {
+			try {
+				const response = await axios.get(`/startup/${id}/posts`);
+				setPosts(response.data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
 
 		fetchStartup();
+		fetchPosts();
 	}, [id]);
+
+	const user = useFetchUser();
+
+	const createPost = async () => {
+		try {
+			const config = {
+				headers: { Authorization: localStorage.getItem('token') },
+			};
+			const data = { title: newPostTitle, content: newPostContent };
+			const response = await axios.post(`/startup/${startup._id}/posts`, data, config);
+			const newPost = response.data;
+			// setPosts((prevPosts) => [...prevPosts, newPost]);
+			// Check if posts array is null before spreading
+			setPosts((prevPosts) => (prevPosts !== null ? [...prevPosts, newPost] : [newPost]));
+			setNewPostTitle('');
+			setNewPostContent('');
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	if (!startup) {
 		return <div>Loading...</div>;
@@ -125,6 +158,53 @@ const StartupTemplate = () => {
 			<div className='my-5'>
 				<Button label='Donate' onClick='' />
 			</div>
+			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg'>
+				<div className='p-5 text-center'>
+					<h1 className='text-2xl font-semibold'>Posts</h1>
+					{user && user._id === startup.owner ? (
+						<div className=' space-y-10 mt-5'>
+							{/* Render existing posts */}
+							{posts.length > 0 ? (
+								<div className='flex flex-col space-y-5'>
+									{posts.map((post) => (
+										<div className='mx-auto bg-slate-300 rounded-md p-5' key={post._id}>
+											<h2 className='text-2xl font-bold underline'>{post.title}</h2>
+											<p>{post.content}</p>
+										</div>
+									))}
+								</div>
+							) : (
+								<p>No posts yet.</p>
+							)}
+							{/* Create new post */}
+							<div className='flex flex-col space-y-5'>
+								<h1 className='text-2xl font-semibold'>Create New Post</h1>
+								<input className='rounded-md p-3 shadow-md' type='text' placeholder='Title' value={newPostTitle} onChange={(e) => setNewPostTitle(e.target.value)} />
+								<textarea className='rounded-md p-3 shadow-md' placeholder='Content' value={newPostContent} onChange={(e) => setNewPostContent(e.target.value)}></textarea>
+								<button className=' bg-primary hover:bg-button_active p-3 text-white font-semibold rounded-md' onClick={createPost}>
+									Create Post
+								</button>
+							</div>
+						</div>
+					) : (
+						<div className='space-y-10 mt-5'>
+							{/* Render existing posts */}
+							{posts.length > 0 ? (
+								<div className='flex flex-col space-y-5'>
+									{posts.map((post) => (
+										<div className='mx-auto bg-slate-300 rounded-md p-5' key={post._id}>
+											<h2 className='text-2xl font-bold underline'>{post.title}</h2>
+											<p>{post.content}</p>
+										</div>
+									))}
+								</div>
+							) : (
+								<p>No posts yet.</p>
+							)}
+						</div>
+					)}
+				</div>
+			</section>
 		</main>
 	);
 };

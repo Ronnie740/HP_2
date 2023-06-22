@@ -13,7 +13,10 @@ const postSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	// Add more fields as per your requirements
+	startup: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Startup',
+	},
 });
 
 const Post = mongoose.model('Post', postSchema);
