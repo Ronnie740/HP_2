@@ -115,13 +115,21 @@ const StartupTemplate = () => {
 			fetchPosts();
 			setNewPostTitle('');
 			setNewPostContent('');
+			// Send notifications to followers
+			const followers = startup.followers;
+			const notificationMessage = startup.startupName + ' created a new post: ' + newPostTitle;
+			console.log(notificationMessage);
+			followers.forEach(async (follower) => {
+				const notificationData = { message: notificationMessage };
+				await axios.post(`/user/${follower}/notifications`, notificationData, config);
+			});
 		} catch (error) {
 			console.error(error);
 		}
 	};
-	function redirectToLogin() {
-		navigate('/login');
-	}
+	// function redirectToLogin() {
+	// 	navigate('/login');
+	// }
 	if (!startup) {
 		return <div>Loading...</div>;
 	}
@@ -140,8 +148,8 @@ const StartupTemplate = () => {
 						<img src={money} alt='img' className='w-auto h-auto max-h-fit rounded-md shadow-lg' />
 						<p className='text-xl'>{startupDesc}</p>
 						<div className='flex justify-center space-x-5 text-2xl'>
-							<p>{startupCategory}</p>
-							<p>{startupCountry}</p>
+							<p>Category: {startupCategory}</p>
+							<p>Country: {startupCountry}</p>
 						</div>
 					</div>
 					<div className='flex flex-col my-auto text-center space-y-4'>
@@ -202,7 +210,7 @@ const StartupTemplate = () => {
 					<div className='grid grid-cols-2 gap-5 mx-auto w-1/2 my-5'>
 						{teamMembers.map((member, index) => (
 							<div className='flex mx-auto' key={index}>
-								<Tabs title={member.name} imageSrc='' subTitle={member.title} description={member.description} />
+								<Tabs title={member.name} imageSrc={money} subTitle={member.title} description={member.description} />
 							</div>
 						))}
 					</div>

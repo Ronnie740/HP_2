@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema({
 		required: true,
 	},
 	favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Startup' }],
+	notifications: [
+		{
+			message: String, // Notification message
+			isRead: Boolean, // Indicates whether the user has read the notification or not
+		},
+	],
 	// Add more fields as per your requirements
 });
 

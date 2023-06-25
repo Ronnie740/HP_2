@@ -3,6 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { truncateDescription } from './card';
+import { Link } from 'react-router-dom';
+
 // import md5 from 'md5';
 
 const Account = () => {
@@ -94,9 +97,12 @@ const Account = () => {
 					{/* Render the followed startups section */}
 					<div className='my-5 space-y-4'>
 						{followedStartups.map((startup) => (
+							// <Link to={`/startup/${startup._id}`}>
 							<div key={startup._id} className='text-center flex flex-col bg-slate-300 rounded-md'>
-								<h1 className='text-2xl font-bold'>{startup.startupName}</h1>
-								<p className='text-xl font-semibold'>{startup.startupDesc}</p>
+								<Link to={`/startup/${startup._id}`}>
+									<h1 className='text-2xl font-bold'>{startup.startupName}</h1>
+									<p className='text-xl font-semibold'>{truncateDescription(startup.startupDesc, 8)}</p>
+								</Link>
 							</div>
 						))}
 					</div>

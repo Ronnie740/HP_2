@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-function truncateDescription(description, wordLimit) {
+export function truncateDescription(description, wordLimit) {
 	const words = description.split(' ');
 	const truncated = words.slice(0, wordLimit).join(' ');
 
