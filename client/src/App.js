@@ -18,7 +18,7 @@ import Account from './components/account';
 import NotFound from './components/utils/404';
 import Login from './components/utils/loginPage';
 import Signup from './components/utils/signupPage';
-
+import TestPage from './components/testImageUpload';
 // import { useState, useEffect } from 'react';
 
 // import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
@@ -28,9 +28,9 @@ import Signup from './components/utils/signupPage';
 // const auth0ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 // const auth0Callback = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 
-const auth0Domain = 'dev-yzjbam3nbxrpmush.us.auth0.com';
-const auth0ClientId = 'Qg6s0AI48wmC1d0ZKyAusNfDGNktZcGY';
-const auth0Callback = 'http://localhost:3000/';
+// const auth0Domain = 'dev-yzjbam3nbxrpmush.us.auth0.com';
+// const auth0ClientId = 'Qg6s0AI48wmC1d0ZKyAusNfDGNktZcGY';
+// const auth0Callback = 'http://localhost:3000/';
 {
 	/* Temporary! Replace with env variables*/
 }
@@ -77,6 +77,7 @@ function App() {
 				<Route path='/startup_registration' element={<StartupReg />} />
 				<Route path='/account' element={<Account />} />
 				<Route path='*' element={<NotFound />} />
+				<Route path='/testUpload' element={<TestPage />} />
 			</Routes>
 			<Footer />
 		</Router>

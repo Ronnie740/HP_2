@@ -74,6 +74,9 @@ const Account = () => {
 		localStorage.removeItem('token');
 		navigate('/');
 	};
+	const handleProfileEdit = () => {
+		navigate('/testUpload');
+	};
 
 	const handleDeleteAccount = () => {
 		// history.push('/');
@@ -81,15 +84,30 @@ const Account = () => {
 	if (!user) {
 		return <div>loading ...</div>; // Render a loading state or redirect to a login page
 	}
-
+	const imageSrc = user.image ? user.image.imageUrl : 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear';
 	// const gravatarUrl = `https://www.gravatar.com/avatar/${md5(user.email)}?s=200`;
 
 	return (
 		<div className='max-w-lg mx-auto p-4'>
 			{user && (
 				<>
-					<div className='flex flex-col items-center mb-4'>
+					{/* <div className='flex flex-col items-center mb-4'>
 						<img className='w-40 h-40 rounded-full mx-auto' src='https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear' alt='Profile' />
+						<h2 className='text-xl font-bold'>{user.name}</h2>
+					</div> */}
+					<div className='flex flex-col items-center mb-4'>
+						<div className='relative'>
+							<img className='w-40 h-40 rounded-full mx-auto' src={imageSrc} alt='Profile' />
+							<button className='absolute right-0 bottom-0 p-2 bg-white rounded-full shadow-md' onClick={handleProfileEdit}>
+								<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-6 h-6'>
+									<path
+										stroke-linecap='round'
+										stroke-linejoin='round'
+										d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
+									/>
+								</svg>
+							</button>
+						</div>
 						<h2 className='text-xl font-bold'>{user.name}</h2>
 					</div>
 
