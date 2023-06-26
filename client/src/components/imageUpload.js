@@ -24,7 +24,7 @@ const ImageUpload = () => {
 	const handleUpload = async () => {
 		if (image) {
 			// Remove the existing image
-			if (user && user.image.fileName) {
+			if (user && user.image) {
 				const storageRef = ref(storage, `images/${user.image.fileName}`);
 				await deleteObject(storageRef)
 					.then(() => {

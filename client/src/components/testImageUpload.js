@@ -6,19 +6,19 @@ import UserImage from './userImage';
 import useFetchUser from './useFetchUser';
 const TestPage = () => {
 	// const [userId, setUserId] = useState('');
-	const [fileName, setFileName] = useState('');
+	// const [fileName, setFileName] = useState('');
 
-	const user = useFetchUser();
-	const userId = user ? user._id : '';
-	const imageUrl = user ? user.image.imageUrl : '';
-	const userImageFilename = user ? user.image.fileName : '';
-	// setFileName(user ? user.image.fileName : '');
-	const handleFormSubmit = (event) => {
-		event.preventDefault();
-		// Reset the input fields after form submission
-		// setUserId('');
-		setFileName('');
-	};
+	// // const user = useFetchUser();
+	// // const userId = user ? user._id : '';
+	// // const imageUrl = user ? user.image.imageUrl : '';
+	// // const userImageFilename = user ? user.image.fileName : '';
+	// // setFileName(user ? user.image.fileName : '');
+	// const handleFormSubmit = (event) => {
+	// 	event.preventDefault();
+	// 	// Reset the input fields after form submission
+	// 	// setUserId('');
+	// 	setFileName('');
+	// };
 
 	return (
 		<div className='mx-20 text-center h-screen'>
