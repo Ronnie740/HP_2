@@ -433,7 +433,67 @@ router.delete('/user/:userId/notifications/:notificationIndex', (req, res) => {
 			res.status(500).json({ message: 'Internal server error' });
 		});
 });
+router.post('/api/users/:userId/image', async (req, res) => {
+	try {
+		const { userId } = req.params;
+		const { fileName, imageUrl } = req.body;
 
+		// Find the user
+		const user = await User.findOne({ _id: userId });
+
+		if (!user) {
+			return res.status(404).json({ message: 'User not found' });
+		}
+
+		let updateData = {};
+
+		if (user.image) {
+			// User already has an image, update the existing image field
+			updateData = {
+				$set: {
+					'image.fileName': fileName,
+					'image.imageUrl': imageUrl,
+				},
+			};
+		} else {
+			// User does not have an image, add the image field
+			updateData = {
+				$set: {
+					image: {
+						fileName,
+						imageUrl,
+					},
+				},
+			};
+		}
+
+		// Update the user with the image data
+		const updatedUser = await User.findOneAndUpdate({ _id: userId }, updateData, { new: true });
+
+		res.status(200).json(updatedUser);
+	} catch (error) {
+		console.error('Error saving image metadata:', error);
+		res.status(500).json({ message: 'Internal server error' });
+	}
+});
+
+// Retrieve image metadata from MongoDB
+router.get('/api/users/:userId/image', async (req, res) => {
+	try {
+		const { userId } = req.params;
+
+		// Find the user and retrieve the image URL
+		const user = await User.findById(userId);
+		if (!user || !user.image) {
+			return res.status(404).json({ message: 'User image not found' });
+		}
+
+		res.status(200).json({ imageUrl: user.image.imageUrl });
+	} catch (error) {
+		console.error('Error retrieving image metadata:', error);
+		res.status(500).json({ message: 'Internal server error' });
+	}
+});
 //error handling
 router.use(function (req, res) {
 	res.status(404);

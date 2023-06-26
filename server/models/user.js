@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
 			isRead: Boolean, // Indicates whether the user has read the notification or not
 		},
 	],
+	image: {
+		fileName: {
+			type: String,
+		},
+		imageUrl: {
+			type: String,
+		},
+	},
 	// Add more fields as per your requirements
 });
 
