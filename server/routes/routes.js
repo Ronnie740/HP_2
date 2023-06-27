@@ -76,7 +76,15 @@ router.post('/post', async (req, res) => {
 		res.status(500).json({ message: 'Failed to create post' });
 	}
 });
-
+router.get('/users', async (req, res) => {
+	try {
+		const users = await User.find();
+		res.json(users);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: 'Server Error' });
+	}
+});
 router.get('/topStartups', async (req, res) => {
 	try {
 		const startups = await Startup.find().limit(3);

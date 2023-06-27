@@ -44,7 +44,8 @@ const Highlight = ({ number, title }) => {
 // };
 const Home = () => {
 	const [startups, setStartups] = useState([]);
-
+	const [length, setLength] = useState(0);
+	const [users, setUsers] = useState(0);
 	useEffect(() => {
 		const fetchStartups = async () => {
 			try {
@@ -54,8 +55,26 @@ const Home = () => {
 				console.error(error);
 			}
 		};
+		const getAllStartups = async () => {
+			try {
+				const response = await axios.get('/startups');
+				setLength(response.data.length);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		const getAllUsers = async () => {
+			try {
+				const response = await axios.get('/users');
+				setUsers(response.data.length);
+			} catch (error) {
+				console.error(error);
+			}
+		};
 
 		fetchStartups();
+		getAllStartups();
+		getAllUsers();
 	}, []);
 
 	return (
@@ -90,8 +109,8 @@ const Home = () => {
 			{/*highlights*/}
 			<section className='w-full bg-secondary h-auto rounded-md'>
 				<div className='grid grid-cols-3 m-5 text-white'>
-					<Highlight number={'100'} title={'Startups'} />
-					<Highlight number={'100'} title={'Users'} />
+					<Highlight number={length} title={'Startups'} />
+					<Highlight number={users} title={'Users'} />
 					<Highlight number={'$10,000'} title={'Donated'} />
 				</div>
 			</section>
