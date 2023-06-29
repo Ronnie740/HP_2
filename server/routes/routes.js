@@ -9,6 +9,15 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const auth = require('./middleware');
 const router = express.Router();
+const paypal = require('paypal-rest-sdk');
+require('dotenv').config();
+
+// Configure PayPal SDK with sandbox credentials
+paypal.configure({
+	mode: 'sandbox',
+	client_id: process.env.PAYPAL_CLIENT_ID,
+	client_secret: process.env.PAYPAL_CLIENT_SECRET,
+});
 
 router.post('/userSignup', async (req, res) => {
 	try {
@@ -502,6 +511,69 @@ router.get('/api/users/:userId/image', async (req, res) => {
 		res.status(500).json({ message: 'Internal server error' });
 	}
 });
+
+// Create a payment
+router.post('/api/paypal/create-payment', (req, res) => {
+	// app.post('/startup/:startupId/donate', (req, res) => {
+	// const startupId = req.params.startupId;
+	const receiverEmail = 'sb-r6g2t26467443@personal.example.com';
+	const { amount } = req.body;
+	const paymentData = {
+		// intent: 'sale',
+		intent: 'sale',
+		payer: {
+			payment_method: 'paypal',
+		},
+		transactions: [
+			{
+				amount: {
+					total: amount,
+					currency: 'USD',
+				},
+				payee: {
+					email: receiverEmail, // Receiver PayPal email
+				},
+			},
+		],
+		redirect_urls: {
+			// return_url: `http://localhost:3000/success?amount=${encodeURIComponent(amount)}`,
+			return_url: `http://localhost:3000/success`,
+			cancel_url: 'http://localhost:3000/cancel',
+		},
+	};
+
+	paypal.payment.create(paymentData, (error, payment) => {
+		if (error) {
+			console.error(error);
+			res.sendStatus(500);
+		} else {
+			// Return the PayPal payment approval URL to the client
+			const approvalUrl = payment.links.find((link) => link.rel === 'approval_url').href;
+			res.json({ approvalUrl, amount });
+		}
+	});
+});
+// router.get('/success/:PayerId/paymentId', (req, res) => {
+router.get('/success', (req, res) => {
+	const { paymentId, payerId } = req.query;
+	// const paymentId = req.params.paymentId;
+	// const payerId = req.params.PayerId;
+	paypal.payment.execute(paymentId, { payer_id: payerId }, (error, payment) => {
+		if (error) {
+			console.error(error);
+			res.sendStatus(500);
+		} else {
+			// res.redirect('http://localhost:3000/success');
+			console.log('Payment was a success!');
+			// console.log(JSON.stringify(payment));
+			// const { total, currency } = payment.transactions[0].amount;
+			// const amount = { total, currency };
+			const redirectUrl = `http://localhost:3000/success`;
+			res.redirect(redirectUrl);
+		}
+	});
+});
+
 //error handling
 router.use(function (req, res) {
 	res.status(404);

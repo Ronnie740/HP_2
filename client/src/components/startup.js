@@ -11,6 +11,10 @@ import Button from './button';
 import axios from 'axios';
 import useFetchUser from './useFetchUser';
 import AddToFavoritesButton from './utils/addToFavourites';
+
+//Paypal payment component
+import PaymentComponent from './paymentComponent';
+
 const ProgressBar = ({ value, maxValue }) => {
 	const progress = (value / maxValue) * 100;
 
@@ -166,6 +170,7 @@ const StartupTemplate = () => {
 							{/* <button className='w-fit bg-primary hover:bg-button_active px-5 py-3 text-white rounded-md font-semibold'>Add to favourites</button> */}
 							{user ? <AddToFavoritesButton userId={user._id} startupId={startup._id} /> : ''}
 						</div>
+						<PaymentComponent />
 					</div>
 				</div>
 			</section>

@@ -19,6 +19,8 @@ import NotFound from './components/utils/404';
 import Login from './components/utils/loginPage';
 import Signup from './components/utils/signupPage';
 import TestPage from './components/testImageUpload';
+import { PaymentSuccessPage } from './components/paymentCompletion';
+import { PaymentCancelPage } from './components/paymentCompletion';
 // import { useState, useEffect } from 'react';
 
 // import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
@@ -78,6 +80,8 @@ function App() {
 				<Route path='/account' element={<Account />} />
 				<Route path='*' element={<NotFound />} />
 				<Route path='/testUpload' element={<TestPage />} />
+				<Route path='/success' element={<PaymentSuccessPage />} />
+				<Route path='/cancel' element={<PaymentCancelPage />} />
 			</Routes>
 			<Footer />
 		</Router>
