@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
-		unique: true,
 	},
 	password: {
 		type: String,
@@ -34,6 +33,15 @@ const userSchema = new mongoose.Schema({
 			type: String,
 		},
 	},
+
+	// category: {
+	// 	type: String,
+	// 	required: true,
+	// },
+	// country: {
+	// 	type: String,
+	// 	required: true,
+	// },
 	// Add more fields as per your requirements
 });
 
