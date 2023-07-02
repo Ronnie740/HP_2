@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Card from './card';
 import axios from 'axios';
 import money from '../images/money.jpeg';
+import useFetchUser from './useFetchUser';
 
 // const ProgressBar = ({ value, maxValue }) => {
 // 	const progress = (value / maxValue) * 100;
@@ -170,6 +171,22 @@ const Discover = () => {
 
 		fetchStartups();
 	}, []);
+
+	const user = useFetchUser();
+	useEffect(() => {
+		if (user) {
+			async function fetchRecommendations() {
+				try {
+					const response = await axios.get(`/recommendations?userId=${user._id}`);
+					console.log(response.data);
+				} catch (error) {
+					console.error('Error retrieving recommendations:', error);
+				}
+			}
+
+			fetchRecommendations();
+		}
+	}, [user]);
 
 	const handleCategorySelect = (value) => {
 		setSelectedCategory(value);
