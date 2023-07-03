@@ -82,7 +82,7 @@ const data = [
 const Dropdown = ({ options, selectedValue, onSelect }) => {
 	return (
 		<select
-			className='border rounded px-4 py-2 bg-primary text-white font-bold hover:bg-button_active cursor-pointer'
+			className='border rounded md:px-4 px-2 py-2 bg-primary text-white font-bold hover:bg-button_active cursor-pointer'
 			onChange={(e) => onSelect(e.target.value)}
 			value={options.find((option) => option.value === selectedValue)?.label || ''}>
 			{options.map((option) => (
@@ -151,6 +151,7 @@ const Discover = () => {
 	const [startups, setStartups] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [locations, setLocations] = useState([]);
+	const [recommended, setRecommended] = useState([]);
 
 	useEffect(() => {
 		const fetchStartups = async () => {
@@ -178,7 +179,9 @@ const Discover = () => {
 			async function fetchRecommendations() {
 				try {
 					const response = await axios.get(`/recommendations?userId=${user._id}`);
-					console.log(response.data);
+					//console.log(response.data);
+					setRecommended(response.data);
+					console.log('Recommended Startups', recommended);
 				} catch (error) {
 					console.error('Error retrieving recommendations:', error);
 				}
@@ -207,9 +210,30 @@ const Discover = () => {
 
 	return (
 		<main className='mx-20'>
+			{/* Recommendations */}
+			{recommended.length >= 1 ? (
+				<>
+					<h1 className='text-center md:text-3xl text-xl font-bold'>Recommendations</h1>
+					<section className='grid lg:grid-cols-2 grid-cols-1 gap-10 my-10'>
+						{recommended.map((recommendation, index) => (
+							<Card
+								key={index}
+								imgSrc={money}
+								imgAlt={recommendation.startupName}
+								name={recommendation.startupName}
+								description={recommendation.startupDesc}
+								height={'md:h-[500px] h-[200px]'}
+								link={`/startup/${recommendation._id}`}
+							/>
+						))}
+					</section>
+				</>
+			) : (
+				''
+			)}
 			{/* categories and location dropdowns */}
-			<section className='flex space-x-10 text-center my-10'>
-				<div className='flex flex-col'>
+			<section className='flex flex-col md:flex-row md:space-x-10 text-center my-10'>
+				<div className='md:flex md:flex-col'>
 					<Dropdown
 						options={[{ value: '', label: 'Choose Category' }, ...categories.map((category) => ({ value: category, label: category }))]}
 						selectedValue={selectedCategory}
@@ -217,7 +241,7 @@ const Discover = () => {
 					/>
 				</div>
 
-				<div className='flex flex-col'>
+				<div className='md:flex md:flex-col'>
 					<Dropdown
 						options={[{ value: '', label: 'Choose location' }, ...locations.map((location) => ({ value: location, label: location }))]}
 						selectedValue={selectedLocation}
@@ -232,9 +256,17 @@ const Discover = () => {
 			</section>
 
 			{/* startups being displayed dynamically */}
-			<section className='grid grid-cols-2 gap-10 my-10'>
+			<section className='grid lg:grid-cols-2 grid-cols-1 gap-10 my-10'>
 				{filteredStartups.map((startup, index) => (
-					<Card key={index} imgSrc={money} imgAlt={startup.startupName} name={startup.startupName} description={startup.startupDesc} height={'h-[500px]'} link={`/startup/${startup._id}`} />
+					<Card
+						key={index}
+						imgSrc={money}
+						imgAlt={startup.startupName}
+						name={startup.startupName}
+						description={startup.startupDesc}
+						height={'md:h-[500px] h-[200px]'}
+						link={`/startup/${startup._id}`}
+					/>
 				))}
 			</section>
 		</main>

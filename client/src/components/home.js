@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const Tabs = ({ imageSrc, altText, description }) => {
 	return (
-		<div className='flex flex-col'>
+		<div className='flex flex-col w-fit md:w-auto mx-auto'>
 			{/*Image*/}
 			<div className='mx-auto'>
 				<img src={imageSrc} alt={altText} className='rounded-md w-60 h-40' />
@@ -82,12 +82,12 @@ const Home = () => {
 			{/*Mission Statement*/}
 			<section className='flex flex-row w-full'>
 				<div className='mx-auto text-center'>
-					<h1 className='text-3xl font-bold'>Our mission</h1>
-					<p className='text-xl w-[300px]'>
+					<h1 className='md:text-3xl text-xl font-bold'>Our mission</h1>
+					<p className='md:text-xl text-base w-[300px]'>
 						Welcome to our Climate Change Awareness website! Our mission is to provide accurate and accessible information about climate change and its impact on our planet.{' '}
 					</p>
 					<div className=' flex justify-center'>
-						<a className='bg-primary px-5 font-bold py-3 mt-5 text-white rounded-md' href='facts'>
+						<a className='bg-primary md:px-5 px-2 font-bold py-3 mt-5 text-white rounded-md' href='facts'>
 							Learn More
 						</a>
 					</div>
@@ -95,8 +95,8 @@ const Home = () => {
 			</section>
 			{/*Why you should care*/}
 			<section className='w-full my-10'>
-				<h1 className='flex justify-center text-3xl font-bold'>Why you should care</h1>
-				<div className='grid grid-cols-3 m-5'>
+				<h1 className='flex justify-center md:text-3xl text-lg text-center font-bold'>Why you should care</h1>
+				<div className='grid md:grid-cols-3 grid-cols-1 space-y-5 md:space-y-0 md:space-x-5 m-5'>
 					<Tabs imageSrc={health} altText={'health image'} description={'Climate change can have significant impacts on human health.'} />
 					<Tabs
 						imageSrc={rainsforest}
@@ -108,7 +108,7 @@ const Home = () => {
 			</section>
 			{/*highlights*/}
 			<section className='w-full bg-secondary h-auto rounded-md'>
-				<div className='grid grid-cols-3 m-5 text-white'>
+				<div className='grid md:grid-cols-3 grid-cols-1 m-5 text-white'>
 					<Highlight number={length} title={'Startups'} />
 					<Highlight number={users} title={'Users'} />
 					<Highlight number={'$10,000'} title={'Donated'} />
@@ -117,7 +117,7 @@ const Home = () => {
 			{/*Top startups*/}
 			<section className='w-full my-10'>
 				<h1 className='flex justify-center text-3xl font-bold'>Top Startups</h1>
-				<div className='grid grid-cols-3 gap-20 w-full mt-10'>
+				<div className='grid md:grid-cols-3 grid-cols-1 gap-20 w-full mt-10'>
 					{startups.map((startup) => (
 						<Card key={startup._id} name={startup.startupName} imgSrc={money} imgAlt={startup.startupName} description={startup.startupDesc} link={`/startup/${startup._id}`} />
 					))}
