@@ -79,6 +79,8 @@ const StartupReg = () => {
 						headers: { Authorization: token },
 					});
 					setUser(response.data);
+				} else {
+					navigate('/login');
 				}
 			} catch (error) {
 				console.error(error);
