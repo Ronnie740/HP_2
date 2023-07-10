@@ -6,6 +6,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import notificationIcon from '../images/notification.png';
 import useFetchUser from './useFetchUser';
+import Login from './utils/Auth0_login';
+import Signup from './utils/auth0_signup';
+import { useAuth0 } from '@auth0/auth0-react';
+
 // import md5 from 'md5';
 
 const Nav = () => {
@@ -59,6 +63,7 @@ const Header = () => {
 	const [notificationCount, setNotificationCount] = useState(0);
 	const [notifications, setNotifications] = useState([]); // New state for notifications
 	const [showDropdown, setShowDropdown] = useState(false);
+	const { logout, isAuthenticated } = useAuth0();
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -132,6 +137,7 @@ const Header = () => {
 
 	const handleLogout = () => {
 		// Perform logout actions (e.g., clearing token from localStorage)
+		logout({ returnTo: window.location.origin });
 		// and redirect to the logout page or desired location
 		localStorage.removeItem('token');
 		// Refresh the user state to null
@@ -149,6 +155,7 @@ const Header = () => {
 	// if (user) {
 	// 	gravatarUrl = `https://www.gravatar.com/avatar/${md5(user.email)}?s=200`;
 	// }
+	const imageSrc = user && user.image ? user.image.imageUrl : 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear';
 	return (
 		<header className='mx-20 flex flex-row justify-between my-5 w-f'>
 			{/*Logo and navigation*/}
@@ -200,7 +207,7 @@ const Header = () => {
 							<Link to='/account' className='md:flex md:space-x-5'>
 								<span className='my-auto text-sm md:text-base hidden md:block'>Hello! {user.name}</span>
 								{/* <img src={gravatarUrl} alt='Profile' className='w-10 h-10 rounded-full' /> */}
-								<img src='https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear' alt='Profile' className='w-10 h-10 rounded-full' />
+								<img src={imageSrc} alt='Profile' className='w-10 h-10 rounded-full' />
 								{/* <img src={<Avatar name={user.name} />} alt='Profile' className='w-10 h-10 rounded-full' /> */}
 							</Link>
 							<button onClick={handleLogout} className='text-sm md:text-base'>
@@ -209,8 +216,10 @@ const Header = () => {
 						</>
 					) : (
 						<>
-							<Link to='/login'>Login</Link>
-							<Link to='/signup'>Signup</Link>
+							{/* <Link to='/login'>Login</Link> */}
+							<Login />
+							<Signup />
+							{/* <Link to='/signup'>Signup</Link> */}
 						</>
 					)}
 				</div>

@@ -23,16 +23,16 @@ import { PaymentSuccessPage } from './components/paymentCompletion';
 import { PaymentCancelPage } from './components/paymentCompletion';
 // import { useState, useEffect } from 'react';
 
-// import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
+import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
 // import Login from './components/utils/login';
 
 // const auth0Domain = process.env.REACT_APP_AUTH0_DOMAIN;
 // const auth0ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 // const auth0Callback = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 
-// const auth0Domain = 'dev-yzjbam3nbxrpmush.us.auth0.com';
-// const auth0ClientId = 'Qg6s0AI48wmC1d0ZKyAusNfDGNktZcGY';
-// const auth0Callback = 'http://localhost:3000/';
+const auth0Domain = 'dev-yzjbam3nbxrpmush.us.auth0.com';
+const auth0ClientId = 'Qg6s0AI48wmC1d0ZKyAusNfDGNktZcGY';
+const auth0Callback = 'http://localhost:3000/';
 {
 	/* Temporary! Replace with env variables*/
 }
@@ -63,29 +63,31 @@ function App() {
 	// // console.log('Local storage is Authenticated:' + localStorage.getItem('isAuthenticated'));
 	// console.log('Auth0 is authenticated:' + isAuthenticated);
 	return (
-		// <Auth0Provider domain={auth0Domain} clientId={auth0ClientId} redirectUri={window.location.origin}>
-		<Router>
-			<Header />
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/about' element={<About />} />
-				<Route path='/discover' element={<Discover />} />
-				<Route path='/contact' element={<Contact />} />
-				<Route path='/facts' element={<Facts />} />
-				{/* <Route path='/startup' element={<Startup />} /> */}
-				<Route path='/startup/:id' element={<StartupTemplate />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/signup' element={<Signup />} />
-				<Route path='/startup_registration' element={<StartupReg />} />
-				<Route path='/account' element={<Account />} />
-				<Route path='*' element={<NotFound />} />
-				<Route path='/testUpload' element={<TestPage />} />
-				<Route path='/success' element={<PaymentSuccessPage />} />
-				<Route path='/cancel' element={<PaymentCancelPage />} />
-			</Routes>
-			<Footer />
-		</Router>
-		// </Auth0Provider>
+		<Auth0Provider domain={auth0Domain} clientId={auth0ClientId} redirectUri={window.location.origin}>
+			<Router>
+				<Header />
+				<div className='min-h-screen'>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/about' element={<About />} />
+						<Route path='/discover' element={<Discover />} />
+						<Route path='/contact' element={<Contact />} />
+						<Route path='/facts' element={<Facts />} />
+						{/* <Route path='/startup' element={<Startup />} /> */}
+						<Route path='/startup/:id' element={<StartupTemplate />} />
+						<Route path='/login' element={<Login />} />
+						<Route path='/signup' element={<Signup />} />
+						<Route path='/startup_registration' element={<StartupReg />} />
+						<Route path='/account' element={<Account />} />
+						<Route path='*' element={<NotFound />} />
+						<Route path='/testUpload' element={<TestPage />} />
+						<Route path='/success' element={<PaymentSuccessPage />} />
+						<Route path='/cancel' element={<PaymentCancelPage />} />
+					</Routes>
+				</div>
+				<Footer />
+			</Router>
+		</Auth0Provider>
 	);
 }
 
