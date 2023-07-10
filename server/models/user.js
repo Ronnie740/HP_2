@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
 	},
 	password: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Startup' }],
 	notifications: [

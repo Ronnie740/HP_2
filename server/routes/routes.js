@@ -21,15 +21,29 @@ paypal.configure({
 });
 
 router.post('/userSignup', async (req, res) => {
+	// try {
+	// 	// const { email, name, password, category, country } = req.body;
+	// 	const { email, name, password } = req.body;
+	// 	// console.log(category);
+	// 	// console.log(country);
+	// 	// Hash the password
+	// 	const hashedPassword = bcrypt.hashSync(password, 10);
+	// 	const user = new User({ email, name, password: hashedPassword });
+	// 	// const user = new User({ email, name, password: hashedPassword, category, country });
+	// 	console.log(user);
+	// 	await user.save();
+	// 	res.status(201).json({ message: 'User added successfully', user: user });
+	// } catch (error) {
+	// 	res.status(500).json({ message: 'Failed to register user' });
+	// }
+	//console.log(req.body.user);
 	try {
-		// const { email, name, password, category, country } = req.body;
-		const { email, name, password } = req.body;
-		// console.log(category);
-		// console.log(country);
-		// Hash the password
-		const hashedPassword = bcrypt.hashSync(password, 10);
-		const user = new User({ email, name, password: hashedPassword });
-		// const user = new User({ email, name, password: hashedPassword, category, country });
+		const { email, nickname, picture } = req.body.user;
+		console.log(nickname);
+		console.log(picture);
+		console.log(email);
+
+		const user = new User({ email, name: nickname, image: { fileName: nickname, imageUrl: picture } });
 		console.log(user);
 		await user.save();
 		res.status(201).json({ message: 'User added successfully', user: user });
@@ -39,21 +53,38 @@ router.post('/userSignup', async (req, res) => {
 });
 // Login a new user
 router.post('/userLogin', async (req, res) => {
-	const { email, name, password } = req.body;
+	// const { email, name, password } = req.body;
+
+	// // Find the user by name and password
+	// User.findOne({ email, name })
+	// 	.then((user) => {
+	// 		// Check if the user exists
+	// 		if (!user) {
+	// 			return res.status(404).json({ error: 'User not found' });
+	// 		}
+
+	// 		// Check if the password is correct
+	// 		if (!bcrypt.compareSync(password, user.password)) {
+	// 			return res.status(401).json({ error: 'Invalid password' });
+	// 		}
+
+	// 		// Create and sign a JWT
+	// 		const token = jwt.sign({ userId: user._id }, config.jwt.secret, { expiresIn: '1h' });
+
+	// 		// Return the token to the client
+	// 		res.json({ token });
+	// 	})
+	// 	.catch((err) => res.status(500).json({ error: err.message }));
+	console.log('Login', req.body);
+	const { email, name, picture } = req.body;
 
 	// Find the user by name and password
-	User.findOne({ email, name })
+	User.findOne({ email })
 		.then((user) => {
 			// Check if the user exists
 			if (!user) {
 				return res.status(404).json({ error: 'User not found' });
 			}
-
-			// Check if the password is correct
-			if (!bcrypt.compareSync(password, user.password)) {
-				return res.status(401).json({ error: 'Invalid password' });
-			}
-
 			// Create and sign a JWT
 			const token = jwt.sign({ userId: user._id }, config.jwt.secret, { expiresIn: '1h' });
 
