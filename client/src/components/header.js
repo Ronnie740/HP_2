@@ -63,7 +63,7 @@ const Header = () => {
 	const [notificationCount, setNotificationCount] = useState(0);
 	const [notifications, setNotifications] = useState([]); // New state for notifications
 	const [showDropdown, setShowDropdown] = useState(false);
-	const { logout, isAuthenticated } = useAuth0();
+	const { logout } = useAuth0();
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -141,7 +141,7 @@ const Header = () => {
 		// and redirect to the logout page or desired location
 		localStorage.removeItem('token');
 		// Refresh the user state to null
-		setUser(null);
+		//setUser(null);
 		// Redirect to the root directory
 		navigate('/');
 	};
