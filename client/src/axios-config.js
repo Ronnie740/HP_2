@@ -2,4 +2,4 @@
 
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
