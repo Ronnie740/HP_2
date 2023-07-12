@@ -21,10 +21,8 @@ const Signup = () => {
 					// Send the user object to the backend
 					await axios.post('/userSignup', { user });
 					console.log('User object sent to backend:', user);
-					// You can perform additional actions, such as displaying a success message
 				} catch (error) {
 					console.error('An error occurred while sending the user object to the backend:', error);
-					// You can handle the error, e.g., display an error message
 				}
 			}
 		};

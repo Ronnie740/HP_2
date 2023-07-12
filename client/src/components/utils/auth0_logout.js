@@ -12,9 +12,9 @@ const Logout = () => {
 		localStorage.removeItem('access_token');
 	};
 
-	if (!isAuthenticated) {
-		return null; // If user is not authenticated, do not render the Logout component
-	}
+	// if (!isAuthenticated) {
+	// 	return null; // If user is not authenticated, do not render the Logout component
+	// }
 
 	return (
 		<div>

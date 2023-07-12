@@ -6,11 +6,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
-	const { loginWithRedirect, isAuthenticated, user } = useAuth0();
+	const { loginWithRedirect, user } = useAuth0();
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true); // Add loading state
 
-	console.log('Is Authenticated state: ' + isAuthenticated);
+	//console.log('Is Authenticated state: ' + isAuthenticated);
 
 	const handleLogin = async () => {
 		try {
@@ -22,12 +22,14 @@ const Login = () => {
 
 	useEffect(() => {
 		const getUserProfile = async () => {
-			if (isAuthenticated && user) {
+			if (user) {
+				console.log(user);
+				//console.log('Is Authenticated state 2: ' + isAuthenticated);
 				try {
 					const response = await axios.post('/userLogin', {
 						email: user.email,
 					});
-					console.log('User login response:', response.data);
+					//console.log('User login response:', response.data);
 					const token = response.data.token;
 					localStorage.setItem('token', token);
 
@@ -44,20 +46,20 @@ const Login = () => {
 		};
 
 		getUserProfile();
-	}, [isAuthenticated, user]);
+	}, [user]);
 
-	useEffect(() => {
-		if (!isLoading) {
-			// After isLoading becomes false, wait for 5 seconds and then navigate to the desired location
-			const loginRedirectPath = localStorage.getItem('loginRedirectPath');
-			if (loginRedirectPath) {
-				localStorage.removeItem('loginRedirectPath');
-				navigate(loginRedirectPath);
-			} else {
-				navigate('/'); // Redirect to home page, or any other default location
-			}
-		}
-	}, [isLoading, navigate]);
+	// useEffect(() => {
+	// 	if (!isLoading) {
+	// 		// After isLoading becomes false, wait for 5 seconds and then navigate to the desired location
+	// 		const loginRedirectPath = localStorage.getItem('loginRedirectPath');
+	// 		if (loginRedirectPath) {
+	// 			localStorage.removeItem('loginRedirectPath');
+	// 			navigate(loginRedirectPath);
+	// 		} else {
+	// 			navigate('/'); // Redirect to home page, or any other default location
+	// 		}
+	// 	}
+	// }, [isLoading, navigate]);
 
 	// if (isAuthenticated) {
 	// 	// If user is already authenticated, no need to render the login component
