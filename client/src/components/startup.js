@@ -106,16 +106,6 @@ const StartupTemplate = () => {
 			const data = { title: newPostTitle, content: newPostContent };
 			const response = await axios.post(`/startup/${startup._id}/posts`, data, config);
 			const newPost = response.data;
-			// setPosts((prevPosts) => [...prevPosts, newPost]);
-			// Check if posts array is null before spreading
-			// setPosts((prevPosts) => (prevPosts !== null ? [...prevPosts, newPost] : [newPost]));
-			// setPosts((prevPosts) => {
-			// 	if (!prevPosts) {
-			// 		return [newPost];
-			// 	} else {
-			// 		return [...prevPosts, newPost];
-			// 	}
-			// });
 			fetchPosts();
 			setNewPostTitle('');
 			setNewPostContent('');
