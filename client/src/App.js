@@ -26,13 +26,9 @@ import { PaymentCancelPage } from './components/paymentCompletion';
 import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
 // import Login from './components/utils/login';
 
-// const auth0Domain = process.env.REACT_APP_AUTH0_DOMAIN;
-// const auth0ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-// const auth0Callback = process.env.REACT_APP_AUTH0_CALLBACK_URL;
-
-const auth0Domain = 'dev-yzjbam3nbxrpmush.us.auth0.com';
-const auth0ClientId = 'Qg6s0AI48wmC1d0ZKyAusNfDGNktZcGY';
-const auth0Callback = 'http://localhost:3000/';
+const auth0Domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const auth0ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+console.log(process.env.REACT_APP_AUTH0_DOMAIN);
 {
 	/* Temporary! Replace with env variables*/
 }
