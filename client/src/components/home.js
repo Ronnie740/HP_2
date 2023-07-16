@@ -78,12 +78,12 @@ const Home = () => {
 	}, []);
 
 	return (
-		<main className=' flex flex-col mx-20 my-10'>
+		<main className=' flex flex-col mx-10 lg:mx-20 my-10'>
 			{/*Mission Statement*/}
 			<section className='flex flex-row w-full'>
 				<div className='mx-auto text-center'>
 					<h1 className='md:text-3xl text-xl font-bold'>Our mission</h1>
-					<p className='md:text-xl text-base w-[300px]'>
+					<p className='md:text-xl text-base lg:w-[300px] w-fit'>
 						Welcome to our Climate Change Awareness website! Our mission is to provide accurate and accessible information about climate change and its impact on our planet.{' '}
 					</p>
 					<div className=' flex justify-center'>
@@ -96,7 +96,7 @@ const Home = () => {
 			{/*Why you should care*/}
 			<section className='w-full my-10'>
 				<h1 className='flex justify-center md:text-3xl text-lg text-center font-bold'>Why you should care</h1>
-				<div className='grid md:grid-cols-3 grid-cols-1 space-y-5 md:space-y-0 md:space-x-5 m-5'>
+				<div className='grid md:grid-cols-3 grid-cols-1 space-y-5 md:space-y-0 md:space-x-5 my-5'>
 					<Tabs imageSrc={health} altText={'health image'} description={'Climate change can have significant impacts on human health.'} />
 					<Tabs
 						imageSrc={rainsforest}

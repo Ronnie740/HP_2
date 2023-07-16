@@ -33,8 +33,8 @@ const About = () => {
 		<main className='mx-20 my-10'>
 			{/* Top */}
 			<div className='flex w-full justify-center'>
-				<div className='w-[30rem] text-center space-y-5'>
-					<h1 className='text-3xl font-bold'>About US</h1>
+				<div className='md:w-[30rem] w-full text-center space-y-5'>
+					<h1 className='lg:text-3xl text-xl font-bold'>About US</h1>
 					<p className='text-xl'>
 						Welcome to our Climate Change Awareness website! Our mission is to provide accurate and accessible information about climate change and its impact on our planet.
 					</p>
@@ -43,8 +43,8 @@ const About = () => {
 			{/* What we Do */}
 			<div className='flex w-full justify-center my-10'>
 				<div className='text-center space-y-5'>
-					<h1 className='text-3xl font-bold'>What we do</h1>
-					<div className='grid grid-cols-3 gap-10'>
+					<h1 className='lg:text-3xl text-xl font-bold'>What we do</h1>
+					<div className='grid md:grid-cols-3  gap-10'>
 						<Tabs
 							imageSrc={educate}
 							altText={''}
@@ -75,8 +75,8 @@ const About = () => {
 			{/* How it works */}
 			<div className='flex w-full justify-center my-10'>
 				<div className='text-center space-y-5'>
-					<h1 className='text-3xl font-bold'>How This Works</h1>
-					<div className='grid grid-cols-3 gap-10'>
+					<h1 className='lg:text-3xl text-xl font-bold'>How This Works</h1>
+					<div className='grid md:grid-cols-3  gap-10'>
 						<Tabs
 							imageSrc={facts}
 							altText={''}

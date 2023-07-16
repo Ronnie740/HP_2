@@ -24,7 +24,7 @@ const Nav = () => {
 			<button
 				onClick={handleSmallNav}
 				type='button'
-				className='inline-flex relative items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 my-auto mx-5'>
+				className='inline-flex relative items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 my-auto mx-5 w-fit'>
 				<span className='sr-only'>Open main menu</span>
 				<svg className='w-6 h-6' aria-hidden='true' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
 					<path
@@ -33,8 +33,9 @@ const Nav = () => {
 						clipRule='evenodd'></path>
 				</svg>
 			</button>
-			<div className={`${isNavOpen ? 'block' : 'hidden'} w-full lg:hidden  absolute mt-10 overflow-hidden bottom-20 `} id='navbar-default'>
-				<div className='font-medium flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800  dark:border-gray-700 w-fit'>
+			<div className={`${isNavOpen ? 'block' : 'hidden'} w-full lg:hidden  absolute mt-10 `} id='navbar-default'>
+				{/* <div className={`${isNavOpen ? 'block' : 'hidden'} w-full lg:hidden  absolute mt-10  bottom-20 `} id='navbar-default'> */}
+				<div className='font-medium flex flex-col p-4 mt-4 border border-gray-100 rounded-md bg-gray-50 dark:bg-gray-800  dark:border-gray-700 w-fit'>
 					<Link to='/' className=' text-sm block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white'>
 						Home
 					</Link>
@@ -157,11 +158,11 @@ const Header = () => {
 	// }
 	const imageSrc = user && user.image ? user.image.imageUrl : 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear';
 	return (
-		<header className='mx-20 flex flex-row justify-between my-5 w-f'>
+		<header className='mx-20 flex flex-col lg:flex-row lg:justify-between my-5'>
 			{/*Logo and navigation*/}
 			<div className='flex space-x-5'>
 				{/* Logo */}
-				<Link to='/' className='my-auto'>
+				<Link to='/' className='my-auto mx-auto lg:mx-0'>
 					<img className='w-40 h-15' src={logo} alt='Logo' />
 				</Link>
 				{/* Nav */}
@@ -172,7 +173,7 @@ const Header = () => {
 					<Link to='contact'>Contact Us</Link>
 				</div>
 			</div>
-			<section className='flex'>
+			<section className='flex mx-auto'>
 				<Nav />
 				{/* Login and Signup */}
 				<div className=' flex w-auto space-x-5 mt-3 items-center'>

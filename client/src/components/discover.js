@@ -82,7 +82,7 @@ const data = [
 const Dropdown = ({ options, selectedValue, onSelect }) => {
 	return (
 		<select
-			className='border rounded md:px-4 px-2 py-2 bg-primary text-white font-bold hover:bg-button_active cursor-pointer'
+			className='border w-auto rounded md:px-4 px-2 py-2 bg-primary text-white font-bold hover:bg-button_active cursor-pointer'
 			onChange={(e) => onSelect(e.target.value)}
 			value={options.find((option) => option.value === selectedValue)?.label || ''}>
 			{options.map((option) => (
@@ -209,7 +209,7 @@ const Discover = () => {
 	};
 
 	return (
-		<main className='mx-20'>
+		<main className='lg:mx-20 mx-10'>
 			{/* Recommendations */}
 			{recommended.length >= 1 ? (
 				<>
@@ -232,22 +232,19 @@ const Discover = () => {
 				''
 			)}
 			{/* categories and location dropdowns */}
-			<section className='flex flex-col md:flex-row md:space-x-10 text-center my-10'>
-				<div className='md:flex md:flex-col'>
-					<Dropdown
-						options={[{ value: '', label: 'Choose Category' }, ...categories.map((category) => ({ value: category, label: category }))]}
-						selectedValue={selectedCategory}
-						onSelect={handleCategorySelect}
-					/>
-				</div>
+			<section className='flex flex-col md:flex-row md:space-x-10 space-y-4 md:space-y-0 text-center my-10 z-10'>
+				<Dropdown
+					options={[{ value: '', label: 'Choose Category' }, ...categories.map((category) => ({ value: category, label: category }))]}
+					selectedValue={selectedCategory}
+					onSelect={handleCategorySelect}
+				/>
 
-				<div className='md:flex md:flex-col'>
-					<Dropdown
-						options={[{ value: '', label: 'Choose location' }, ...locations.map((location) => ({ value: location, label: location }))]}
-						selectedValue={selectedLocation}
-						onSelect={handleLocationSelect}
-					/>
-				</div>
+				<Dropdown
+					options={[{ value: '', label: 'Choose location' }, ...locations.map((location) => ({ value: location, label: location }))]}
+					selectedValue={selectedLocation}
+					onSelect={handleLocationSelect}
+				/>
+
 				{selectedCategory !== '' || selectedLocation !== '' ? (
 					<button className='bg-primary hover:bg-button_active text-white rounded-md py-2 px-4' onClick={resetFilters}>
 						Reset Filters

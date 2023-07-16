@@ -10,8 +10,8 @@ const Tabs = ({ imageSrc, altText, description, title, subTitle, height }) => {
 	return (
 		<div className='flex flex-col w-fit h-fit'>
 			{/*Image*/}
-			<div className='mx-auto'>
-				<img src={imageSrc} alt={filler} className={`rounded-md w-60 ${height}`} />
+			<div className='mx-auto px-2'>
+				<img src={imageSrc} alt={filler} className={`rounded-md w-auto lg:w-60 lg:${height} h-auto`} />
 			</div>
 			{/* title */}
 			<h1 className='text-xl font-semibold'>{title}</h1>

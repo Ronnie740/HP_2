@@ -133,10 +133,10 @@ const StartupTemplate = () => {
 	goalPercentage = 80;
 
 	return (
-		<main className='mx-20'>
+		<main className='lg:mx-20 mx-5'>
 			{/* Startup Bio */}
-			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg'>
-				<div className='grid grid-cols-2 gap-5 m-5'>
+			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg w-fit'>
+				<div className='grid lg:grid-cols-2  gap-5 m-5'>
 					<div className='flex flex-col space-y-5 text-center'>
 						<h1 className='text-2xl font-semibold'>{startupName}</h1>
 						<img src={money} alt='img' className='w-auto h-auto max-h-fit rounded-md shadow-lg' />
@@ -165,15 +165,15 @@ const StartupTemplate = () => {
 				</div>
 			</section>
 			{/* Problems being solved */}
-			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg text-center flex flex-col justify-center'>
+			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg text-center flex flex-col justify-center px-3'>
 				<div className='flex flex-col'>
 					<h1 className='text-2xl font-semibold'> Problems being solved</h1>
 					<p>{problemSolved}</p>
 				</div>
 				{/* Danger Posed */}
-				<div className='flex flex-col m-5'>
+				<div className='flex flex-col md:m-5'>
 					<h1 className='text-2xl font-semibold'>Dangers Posed</h1>
-					<div className='grid grid-cols-2 gap-5 mx-auto w-1/2 my-5'>
+					<div className='grid lg:grid-cols-2 gap-5 mx-auto lg:w-1/2 w-fit my-5'>
 						{dangers.map((danger, index) => (
 							<div className='flex mx-auto' key={index}>
 								<Tabs title={danger} imageSrc={Danger_1} height={'h-60'} />
@@ -188,27 +188,47 @@ const StartupTemplate = () => {
 				{/* Videos */}
 				<div className='flex flex-col m-5'>
 					<h1 className='text-2xl font-semibold'>Videos</h1>
-					<div className='grid grid-cols-2 gap-5 mx-auto w-full my-5'>
-						{videos.map((video, index) => (
-							<div className='flex mx-auto h-80' key={index}>
-								<ReactPlayer url={video} width='560px' height='315px' controls />
-							</div>
-						))}
-					</div>
+					{videos && videos.length == 2 ? (
+						<div className='grid lg:grid-cols-2 gap-5 mx-auto w-full my-5'>
+							{videos.map((video, index) => (
+								<div className='flex mx-auto h-80' key={index}>
+									<ReactPlayer url={video} className='md:w-[30rem] md:h-80 h-full w-full' width='' height='' controls />
+								</div>
+							))}
+						</div>
+					) : (
+						<div className='grid gap-5 mx-auto w-full my-5'>
+							{videos.map((video, index) => (
+								<div className='flex mx-auto h-80' key={index}>
+									<ReactPlayer url={video} className='md:w-[30rem] md:h-80 h-full w-full' width='' height='' controls />
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 			</section>
 
 			{/* Team members */}
-			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg text-center flex flex-col justify-center w-auto'>
+			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg text-center flex flex-col justify-center md:w-auto w-fit'>
 				<div className='flex flex-col m-5'>
 					<h1 className='text-2xl font-semibold'>Meet The Team</h1>
-					<div className='grid grid-cols-2 gap-5 mx-auto w-1/2 my-5'>
-						{teamMembers.map((member, index) => (
-							<div className='flex mx-auto' key={index}>
-								<Tabs title={member.name} imageSrc={money} subTitle={member.title} description={member.description} />
-							</div>
-						))}
-					</div>
+					{teamMembers && teamMembers.length == 2 ? (
+						<div className='grid lg:grid-cols-2 gap-5 mx-auto lg:w-1/2 my-5'>
+							{teamMembers.map((member, index) => (
+								<div className='flex mx-auto' key={index}>
+									<Tabs title={member.name} imageSrc={money} subTitle={member.title} description={member.description} />
+								</div>
+							))}
+						</div>
+					) : (
+						<div className='grid gap-5 mx-auto lg:w-1/2 my-5'>
+							{teamMembers.map((member, index) => (
+								<div className='flex mx-auto' key={index}>
+									<Tabs title={member.name} imageSrc={money} subTitle={member.title} description={member.description} />
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 			</section>
 			<div className='my-5'>

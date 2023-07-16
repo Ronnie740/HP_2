@@ -13,7 +13,7 @@ export function truncateDescription(description, wordLimit) {
 }
 
 const Card = ({ name, description, imgSrc, imgAlt, link, height }) => {
-	const className = `relative ${height ? height : 'sm:h-[400px] h-[200px]'} cursor-pointer`;
+	const className = `relative ${height ? height : 'sm:h-[400px] h-[200px]'} cursor-pointer z-0`;
 	return (
 		// <a className='relative h-[400px] cursor-pointer' href={link}>
 		<a className={className} href={link}>

@@ -13,10 +13,10 @@ const Section = ({ imgSrc, imgAlt, title, description }) => {
 	return (
 		<section>
 			<div className='flex flex-col text-center space-y-5'>
-				<h1 className='text-3xl font-bold'>{title}</h1>
-				<p className='text-xl'>{description}</p>
+				<h1 className='lg:text-3xl text-xl font-bold'>{title}</h1>
+				<p className='lg:text-xl text-base'>{description}</p>
 			</div>
-			<img src={imgSrc} alt={imgAlt} className='w-full rounded-md h-[60vh] my-10' />
+			<img src={imgSrc} alt={imgAlt} className='w-full rounded-md lg:h-[60vh] h-auto my-10' />
 		</section>
 	);
 };
@@ -34,7 +34,7 @@ const Section_2 = ({ imgSrc, imgAlt, description }) => {
 };
 const Facts = () => {
 	return (
-		<main className='mx-20'>
+		<main className='lg:mx-20 mx-10'>
 			<Section
 				imgSrc={Glacier}
 				imgAlt={'climate_1'}
@@ -53,8 +53,8 @@ const Facts = () => {
 			/>
 			<section>
 				<div className='flex flex-col text-center space-y-5'>
-					<h1 className='text-3xl font-bold'>Human Impact on Climate Change</h1>
-					<p className='text-xl'>
+					<h1 className='lg:text-3xl text-xl font-bold'>Human Impact on Climate Change</h1>
+					<p className='lg:text-xl text-base'>
 						Human activities have a profound impact on climate change. The burning of fossil fuels, such as coal, oil, and natural gas, for energy production releases large amounts of
 						greenhouse gases, particularly carbon dioxide (CO2), into the atmosphere. These greenhouse gases trap heat from the sun, leading to a rise in global temperatures and
 						contributing to the greenhouse effect. Deforestation, another human activity, reduces the Earth's capacity to absorb CO2, as trees act as carbon sinks. Additionally, industrial
@@ -63,7 +63,7 @@ const Facts = () => {
 						change and transition towards sustainable practices that reduce greenhouse gas emissions and promote environmental stewardship.
 					</p>
 				</div>
-				<div className='grid md:grid-cols-3 m-5'>
+				<div className='grid md:grid-cols-3 lg:m-5 m-2'>
 					<Section_2 imgSrc={Cause_1} imgAlt={'tab1'} description={'Pollution'} />
 					<Section_2 imgSrc={Cause_2} imgAlt={'tab1'} description={'Deforestration'} />
 					<Section_2 imgSrc={Cause_3} imgAlt={'tab1'} description={'Improper waste Disposal'} />
@@ -71,16 +71,16 @@ const Facts = () => {
 			</section>
 			<section>
 				<div className='flex justify-center text-center'>
-					<h1 className='text-3xl font-bold'>Effects of Climate Change</h1>
+					<h1 className='lg:text-3xl text-xl font-bold'>Effects of Climate Change</h1>
 				</div>
-				<div className='grid md:grid-cols-3 m-5'>
+				<div className='grid md:grid-cols-3 lg:m-5 m-2'>
 					<Section_2 imgSrc={Effect_1} imgAlt={'tab1'} description={'Flooding'} />
 					<Section_2 imgSrc={Effect_2} imgAlt={'tab1'} description={'Wildfires'} />
 					<Section_2 imgSrc={Effect_3} imgAlt={'tab1'} description={'Drought'} />
 				</div>
 			</section>
 			<div className='flex w-full justify-center mb-5'>
-				<a href='discover' className='text-xl font-bold px-5 py-3 bg-primary text-white rounded-md '>
+				<a href='discover' className='lg:text-xl font-bold px-3 py-1 lg:px-5 lg:py-3 bg-primary text-white rounded-md '>
 					View Solutions
 				</a>
 			</div>
