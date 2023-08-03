@@ -71,8 +71,8 @@ function App() {
 						<Route path='/facts' element={<Facts />} />
 						{/* <Route path='/startup' element={<Startup />} /> */}
 						<Route path='/startup/:id' element={<StartupTemplate />} />
-						<Route path='/login' element={<Login />} />
-						<Route path='/signup' element={<Signup />} />
+						{/* <Route path='/login' element={<Login />} />
+						<Route path='/signup' element={<Signup />} /> */}
 						<Route path='/startup_registration' element={<StartupReg />} />
 						<Route path='/account' element={<Account />} />
 						<Route path='*' element={<NotFound />} />

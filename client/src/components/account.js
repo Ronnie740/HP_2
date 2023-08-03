@@ -100,6 +100,7 @@ const Account = () => {
 					<div className='flex flex-col items-center mb-4'>
 						<div className='relative'>
 							<img className='w-40 h-40 rounded-full mx-auto' src={imageSrc} alt='Profile' />
+							{/* Edit Button */}
 							<button className='absolute right-0 bottom-0 p-2 bg-white rounded-full shadow-md' onClick={handleProfileEdit}>
 								<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor' className='w-6 h-6'>
 									<path

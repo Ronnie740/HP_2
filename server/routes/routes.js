@@ -519,10 +519,9 @@ router.get('/api/users/:userId/image', async (req, res) => {
 router.post('/api/paypal/create-payment', (req, res) => {
 	// app.post('/startup/:startupId/donate', (req, res) => {
 	// const startupId = req.params.startupId;
-	const receiverEmail = 'sb-r6g2t26467443@personal.example.com';
+	const receiverEmail = 'sb-xgily26454384@personal.example.com';
 	const { amount } = req.body;
 	const paymentData = {
-		// intent: 'sale',
 		intent: 'sale',
 		payer: {
 			payment_method: 'paypal',

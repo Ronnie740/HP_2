@@ -173,7 +173,7 @@ const Header = () => {
 					<Link to='contact'>Contact Us</Link>
 				</div>
 			</div>
-			<section className='flex mx-auto'>
+			<section className='flex mx-auto lg:mx-0'>
 				<Nav />
 				{/* Login and Signup */}
 				<div className=' flex w-auto space-x-5 mt-3 items-center'>
@@ -181,7 +181,7 @@ const Header = () => {
 						<>
 							<div className='relative'>
 								<div className='cursor-pointer' onClick={handleToggleDropdown}>
-									<img src={notificationIcon} className='w-6 h-6' />
+									<img src={notificationIcon} className='w-6 h-6 min-w-fit' />
 									{notificationCount > 0 && (
 										<div className='absolute -top-1 -right-1 bg-red-500 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs'>{notificationCount}</div>
 									)}
@@ -208,7 +208,7 @@ const Header = () => {
 							<Link to='/account' className='md:flex md:space-x-5'>
 								<span className='my-auto text-sm md:text-base hidden md:block'>Hello! {user.name}</span>
 								{/* <img src={gravatarUrl} alt='Profile' className='w-10 h-10 rounded-full' /> */}
-								<img src={imageSrc} alt='Profile' className='w-10 h-10 rounded-full' />
+								<img src={imageSrc} alt='Profile' className='w-10 h-10 rounded-full min-w-fit lg:min-w-0' />
 								{/* <img src={<Avatar name={user.name} />} alt='Profile' className='w-10 h-10 rounded-full' /> */}
 							</Link>
 							<button onClick={handleLogout} className='text-sm md:text-base'>

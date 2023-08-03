@@ -71,6 +71,9 @@ const startupSchema = new mongoose.Schema({
 		required: true,
 	},
 	followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+	image: {
+		type: String,
+	},
 });
 const Startup = mongoose.model('Startup', startupSchema);
 
