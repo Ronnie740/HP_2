@@ -228,9 +228,9 @@ const StartupTemplate = () => {
 					)}
 				</div>
 			</section>
-			<div className='my-5'>
+			{/* <div className='my-5'>
 				<Button label='Donate' onClick='' />
-			</div>
+			</div> */}
 			<section className='bg-slate-200 py-10 my-10 rounded-md shadow-lg'>
 				<div className='p-5 text-center'>
 					<h1 className='text-2xl font-semibold'>Posts</h1>
