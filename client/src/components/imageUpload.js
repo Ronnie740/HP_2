@@ -31,7 +31,6 @@ const ImageUpload = () => {
 						console.log('File deleted successfully');
 					})
 					.catch((error) => {
-						// Uh-oh, an error occurred!
 						console.log(error);
 					});
 			}

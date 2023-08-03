@@ -4,59 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:4000';
-
-// const StartupReg = () => {
-// 	const handleSubmit = async (event) => {
-// 		event.preventDefault();
-
-// 		try {
-// 			const newStartup = {
-// 				name: 'Example Startup',
-// 				description: 'This is an example startup',
-// 				problems: 'Some problems',
-// 				dangers: 'Potential dangers',
-// 				solution: 'Proposed solution',
-// 				video_urls: 'http://example.com/videos',
-// 				team: [
-// 					{
-// 						name: 'John Doe',
-// 						jobTitle: 'CEO',
-// 						description: 'Some description',
-// 					},
-// 					{
-// 						name: 'Jane Smith',
-// 						jobTitle: 'CTO',
-// 						description: 'Another description',
-// 					},
-// 				],
-// 			};
-
-// 			const response = await axios.post('/startups', newStartup);
-// 			console.log(response.data); // Handle the response as needed
-// 		} catch (error) {
-// 			console.error(error);
-// 		}
-// 	};
-
-// 	return (
-// 		<div className='flex'>
-// 			<form onSubmit={handleSubmit} className='mx-auto'>
-// 				{/* form fields */}
-// 				<button type='submit' className='p-5 rounded-md hover:bg-button_active m-5 bg-primary text-white text-3xl font-bold capitalize'>
-// 					Submit
-// 				</button>
-// 			</form>
-// 		</div>
-// 	);
-// };
 const StartupReg = () => {
 	const [startupData, setStartupData] = useState({
 		startupName: '',
 		startupDesc: '',
 		startupCountry: '',
 		startupCategory: '',
-		// goalPercentage: '',
 		paypalLink: '',
 		goal: '',
 		problemSolved: '',
@@ -190,24 +143,6 @@ const StartupReg = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		// Set the user ID as the owner of the startup data
-		// if (user) {
-		// 	console.log('User ID: ' + user._id);
-		// 	setStartupData((prevState) => ({
-		// 		...prevState,
-		// 		owner: user._id,
-		// 	}));
-		// }
-
-		// Send startupData to the server
-		// console.log(startupData);
-		// try {
-		// 	const response = await axios.post('/startup', startupData);
-		// 	console.log(response.data); // Handle the response as needed
-		// } catch (error) {
-		// 	console.error(error);
-		// }
 		// Set the user ID as the owner of the startup data
 		if (user) {
 			console.log('User ID: ' + user._id);
@@ -217,7 +152,7 @@ const StartupReg = () => {
 			console.log(updatedStartupData);
 			try {
 				const response = await axios.post('/startup', updatedStartupData);
-				console.log(response.data); // Handle the response as needed
+				console.log(response.data);
 			} catch (error) {
 				console.error(error);
 			}
@@ -229,7 +164,6 @@ const StartupReg = () => {
 			startupDesc: '',
 			startupCountry: '',
 			startupCategory: '',
-			// goalPercentage: '',
 			paypalLink: '',
 			goal: '',
 			problemSolved: '',
@@ -483,5 +417,3 @@ const StartupReg = () => {
 };
 
 export default StartupReg;
-
-// export default StartupReg;

@@ -15,7 +15,6 @@ export function truncateDescription(description, wordLimit) {
 const Card = ({ name, description, imgSrc, imgAlt, link, height }) => {
 	const className = `relative ${height ? height : 'sm:h-[400px] h-[200px]'} cursor-pointer z-0`;
 	return (
-		// <a className='relative h-[400px] cursor-pointer' href={link}>
 		<a className={className} href={link}>
 			<img src={imgSrc} alt={imgAlt} className='rounded-md w-full h-full' />
 			<div className='absolute inset-0 flex items-end justify-center'>

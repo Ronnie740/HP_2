@@ -6,32 +6,14 @@ import axios from 'axios';
 const PaymentSuccessPage = () => {
 	const location = useLocation();
 	const [amount, setAmount] = useState('');
-
-	// useEffect(() => {
-	// 	const searchParams = new URLSearchParams(location.search);
-	// 	console.log(decodeURIComponent(searchParams));
-	// 	const amountString = searchParams.get('amount');
-	// 	console.log(decodeURIComponent(amountString));
-	// 	if (amountString) {
-	// 		// setAmount(JSON.parse(decodeURIComponent(amountString)));
-	// 		const formattedAmount = parseFloat(amountString).toLocaleString(undefined, {
-	// 			minimumFractionDigits: 2,
-	// 			maximumFractionDigits: 2,
-	// 		});
-	// 		setAmount(formattedAmount);
-	// 	}
-	// }, [location]);
 	useEffect(() => {
 		const searchParams = new URLSearchParams(location.search);
 		const payerId = decodeURIComponent(searchParams.get('PayerID'));
-		// const amount = decodeURIComponent(searchParams.get('amount'));
 		const paymentId = decodeURIComponent(searchParams.get('paymentId'));
 		console.log(paymentId);
 		axios
-			// .get(`/success/${payerId}/${paymentId}`) // Make a GET request to the server to retrieve payment details
 			.get(`/success?payerId=${payerId}&paymentId=${paymentId}`) // Make a GET request to the server to retrieve payment details
 			.then((response) => {
-				// Process the payment details as needed
 				console.log(response.data);
 			})
 			.catch((error) => {

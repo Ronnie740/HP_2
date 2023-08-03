@@ -10,8 +10,6 @@ import Login from './utils/Auth0_login';
 import Signup from './utils/auth0_signup';
 import { useAuth0 } from '@auth0/auth0-react';
 
-// import md5 from 'md5';
-
 const Nav = () => {
 	const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -137,25 +135,12 @@ const Header = () => {
 	};
 
 	const handleLogout = () => {
-		// Perform logout actions (e.g., clearing token from localStorage)
 		logout({ returnTo: window.location.origin });
-		// and redirect to the logout page or desired location
 		localStorage.removeItem('token');
-		// Refresh the user state to null
-		//setUser(null);
 		// Redirect to the root directory
 		navigate('/');
 	};
 	//console.log(user);
-
-	// if (user) {
-	// 	console.log(user._id);
-	// }
-	// Gravetar avatars
-	// let gravatarUrl = ``;
-	// if (user) {
-	// 	gravatarUrl = `https://www.gravatar.com/avatar/${md5(user.email)}?s=200`;
-	// }
 	const imageSrc = user && user.image ? user.image.imageUrl : 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear';
 	return (
 		<header className='mx-20 flex flex-col lg:flex-row lg:justify-between my-5'>
@@ -207,9 +192,7 @@ const Header = () => {
 							</div>
 							<Link to='/account' className='md:flex md:space-x-5'>
 								<span className='my-auto text-sm md:text-base hidden md:block'>Hello! {user.name}</span>
-								{/* <img src={gravatarUrl} alt='Profile' className='w-10 h-10 rounded-full' /> */}
 								<img src={imageSrc} alt='Profile' className='w-10 h-10 rounded-full min-w-fit lg:min-w-0' />
-								{/* <img src={<Avatar name={user.name} />} alt='Profile' className='w-10 h-10 rounded-full' /> */}
 							</Link>
 							<button onClick={handleLogout} className='text-sm md:text-base'>
 								Logout

@@ -6,11 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { truncateDescription } from './card';
 import { Link } from 'react-router-dom';
 
-//import { useAuth0 } from '@auth0/auth0-react';
-// import md5 from 'md5';
-
 const Account = () => {
-	// const { user, logout, deleteUser, isAuthenticated } = useAuth0();
 	const navigate = useNavigate();
 	const [user, setUser] = useState(null);
 	useEffect(() => {
@@ -87,16 +83,11 @@ const Account = () => {
 		return <div>loading ...</div>; // Render a loading state or redirect to a login page
 	}
 	const imageSrc = user.image ? user.image.imageUrl : 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear';
-	// const gravatarUrl = `https://www.gravatar.com/avatar/${md5(user.email)}?s=200`;
 
 	return (
 		<div className='max-w-lg mx-auto p-4'>
 			{user && (
 				<>
-					{/* <div className='flex flex-col items-center mb-4'>
-						<img className='w-40 h-40 rounded-full mx-auto' src='https://api.dicebear.com/6.x/fun-emoji/svg?seed=Bear' alt='Profile' />
-						<h2 className='text-xl font-bold'>{user.name}</h2>
-					</div> */}
 					<div className='flex flex-col items-center mb-4'>
 						<div className='relative'>
 							<img className='w-40 h-40 rounded-full mx-auto' src={imageSrc} alt='Profile' />

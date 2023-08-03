@@ -120,17 +120,6 @@ router.get('/getUserInfo', auth.authenticateToken, async (req, res) => {
 	}
 });
 // Get a startup by owner
-// router.get('/startup', async (req, res) => {
-// 	const { owner } = req.query;
-// 	try {
-// 		const startup = await Startup.find({ owner });
-// 		res.status(200).json(startup);
-// 	} catch (error) {
-// 		console.error(error);
-// 		res.status(500).json({ error: 'Failed to get startup' });
-// 	}
-// });
-// Get a startup by owner
 router.get('/startup', async (req, res) => {
 	const { owner, id } = req.query;
 	try {

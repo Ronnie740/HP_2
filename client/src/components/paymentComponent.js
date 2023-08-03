@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-// const PaymentComponent = (startupId) => {
 const PaymentComponent = () => {
 	const [approvalUrl, setApprovalUrl] = useState('');
 	const [amount, setAmount] = useState('');
@@ -24,9 +23,6 @@ const PaymentComponent = () => {
 				Enter Donation Amount in $USD
 			</label>
 			<input type='number' value={amount} name='amount' onChange={(e) => setAmount(e.target.value)} className='border border-gray-300 rounded-md py-2 px-4 mb-4' placeholder='Enter amount' />
-			{/* <button onClick={initiatePayment} className='bg-primary hover:bg-button_active text-white font-semibold py-2 px-4 rounded-md'>
-				Pay with PayPal
-			</button> */}
 			<button
 				onClick={initiatePayment}
 				type='button'

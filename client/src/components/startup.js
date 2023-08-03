@@ -121,9 +121,6 @@ const StartupTemplate = () => {
 			console.error(error);
 		}
 	};
-	// function redirectToLogin() {
-	// 	navigate('/login');
-	// }
 	if (!startup) {
 		return <div>Loading...</div>;
 	}
