@@ -33,16 +33,6 @@ const userSchema = new mongoose.Schema({
 			type: String,
 		},
 	},
-
-	// category: {
-	// 	type: String,
-	// 	required: true,
-	// },
-	// country: {
-	// 	type: String,
-	// 	required: true,
-	// },
-	// Add more fields as per your requirements
 });
 
 const User = mongoose.model('User', userSchema);
